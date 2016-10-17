@@ -1,0 +1,36 @@
+{
+  "name": "bubble-gum-tools",
+  "version": "0.0.1",
+  "description": "tools for working with nested objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nquicenob/bubble-gum-tools.git"
+  },
+  "keywords": [
+    "tools",
+    "utils",
+    "nested",
+    "objects",
+    "objects",
+    "deep",
+    "dot",
+    "notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nquicenob/bubble-gum-tools/issues"
+  },
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "lerna": "2.0.0-beta.30",
+    "rimraf": "^2.5.4",
+    "tape": "^4.6.2"
+  }
+}

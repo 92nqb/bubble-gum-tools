@@ -1,0 +1,15 @@
+{
+  "name": "bubble-gum-create",
+  "version": "0.0.1",
+  "description": "nested objects created by dot notation",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-create",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "keywords": [
+    "nested objects",
+    "create objects",
+    "dot notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT"
+}

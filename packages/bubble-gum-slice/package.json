@@ -1,0 +1,15 @@
+{
+  "name": "bubble-gum-slice",
+  "version": "0.0.1",
+  "description": "slice objects",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-slice",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "keywords": [
+    "nested objects",
+    "slice objects",
+    "dot notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT"
+}

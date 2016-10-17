@@ -1,0 +1,15 @@
+{
+  "name": "bubble-gum-get",
+  "version": "0.0.1",
+  "description": "get properties in nested objects",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-get",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "keywords": [
+    "nested objects",
+    "get property",
+    "dot notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT"
+}

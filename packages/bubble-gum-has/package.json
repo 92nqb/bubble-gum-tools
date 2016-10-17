@@ -1,0 +1,15 @@
+{
+  "name": "bubble-gum-has",
+  "version": "0.0.1",
+  "description": "check if a property exists in nested objects",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-has",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "keywords": [
+    "nested objects",
+    "has properties",
+    "dot notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT"
+}

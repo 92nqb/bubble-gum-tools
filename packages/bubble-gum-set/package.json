@@ -1,0 +1,15 @@
+{
+  "name": "bubble-gum-set",
+  "version": "0.0.1",
+  "description": "set properties in nested objects",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-set",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "keywords": [
+    "nested objects",
+    "set properties",
+    "dot notation"
+  ],
+  "author": "Nicolas Quiceno Benavides",
+  "license": "MIT"
+}
