@@ -1,16 +1,13 @@
 {
-  "name": "bubble-gum-walk",
+  "name": "bubble-gum-goto",
   "version": "0.0.1",
-  "description": "slice objects",
+  "description": "goto to doc path en call fn",
   "main": "lib/index.js",
-  "scripts": {
-    "build": "babel-node test"
-  },
-  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-walk",
+  "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-goto",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
     "nested objects",
-    "slice objects",
+    "goto doc path objects",
     "dot notation"
   ],
   "author": "Nicolas Quiceno Benavides",
