@@ -2,6 +2,7 @@ const babel = require('babel-core');
 const glob = require('glob');
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const minimist = require('minimist');
 
 const BABEL_CONFIG_FILE = '.babelrc';
 const PROJECT_ROOT = process.env.NODE_PATH;

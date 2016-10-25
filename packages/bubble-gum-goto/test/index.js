@@ -3,10 +3,10 @@ const bubbleGumGoto = require('../src');
 
 tape('bubble-gum-goto - api', t => {
   t.plan(4);
-  t.is(typeof bubbleGumGoto.goto, 'function', 'should be a function');
-  t.is(bubbleGumGoto.goto.length, 2, 'should receive two param');
-  t.is(typeof bubbleGumGoto.goto(), 'function', 'should return a function');
-  t.is(bubbleGumGoto.goto().length, 1, 'should receive one param');
+  t.is(typeof bubbleGumGoto, 'function', 'should be a function');
+  t.is(bubbleGumGoto.length, 2, 'should receive two param');
+  t.is(typeof bubbleGumGoto([]), 'function', 'should return a function');
+  t.is(bubbleGumGoto([]).length, 1, 'should receive one param');
 });
 
 tape('goto(path, fn)', t => {
@@ -26,12 +26,13 @@ tape('goto(path, fn)', t => {
     testObj: {
       doc: { root: { path: 'path' } },
     },
-  }]. forEach({ path, testObj } => {
+  }].forEach(({ path, testObj }) => {
     bubbleGumGoto(path, (value, keyPath, obj) => {
       t.is(value, keyPath, 'should be equals');
       t.same(obj, testObj, 'should be the same obj');
-    });
+    })(testObj);
   });
+  t.end();
 });
 
 tape('goto(path, fn) - with arrays', t => {

@@ -1,7 +1,7 @@
 {
   "name": "bubble-gum-goto",
   "version": "0.0.1",
-  "description": "goto to doc path en call fn",
+  "description": "goto to array path",
   "main": "lib/index.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-goto",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
