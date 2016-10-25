@@ -1,16 +1,20 @@
-// # 1
-export default function goto(pathArr, fn) {
-  const path = [].concat(pathArr).reverse();
-  let pathLen = path.length;
+/**
+ * goto path and call the function
+ * 
+ * @param  {Array} path path to property
+ * @param  {Function} fn call function in the end of loop
+ * @return {*} result of call the callback fn
+ */
+export default function goto(path, fn) {
+  const { length: len } = path;
   return function _goto(target) {
     let memoPrev = target;
     let currentPath;
-    while(--pathLen >= 0) {
-      currentPath = path[pathLen];
+    let init = 0;
+    while((undefined !== memoPrev) && (init < len)) {
+      currentPath = path[init];
       memoPrev = memoPrev[currentPath];
-      if ((undefined === memoPrev) || (pathLen === 0)) {
-        break;
-      }
+      init++;
     }
     return fn(memoPrev, currentPath, target);
   };

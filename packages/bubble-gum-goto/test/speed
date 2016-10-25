@@ -14,9 +14,9 @@ function getPath() {
 
 console.time('all');
 console.time('all -- no init prev');
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 50; i++) {
   console.time('init loop' + i);
-  for (let i = 0; i < 10000; i++) {
+  for (let i = 0; i < 100000; i++) {
     bubbleGumGoto(getPath(), () => {})(getTarget());
   }
   console.timeEnd('init loop' + i);
@@ -24,13 +24,127 @@ for (let i = 0; i < 5; i++) {
 console.timeEnd('all -- no init prev');
 
 console.time('all -- init prev');
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 50; i++) {
   const fn = bubbleGumGoto(getPath(), () => {});
   console.time('init loop' + i);
-  for (let i = 0; i < 10000; i++) {
+  for (let i = 0; i < 100000; i++) {
     fn(getTarget());
   }
   console.timeEnd('init loop' + i);
 }
 console.timeEnd('all -- init prev');
 console.timeEnd('all');
+
+// # 1 while -- - slow
+// export default function goto(pathArr, fn) {
+//   const path = [].concat(pathArr).reverse();
+//   let pathLen = path.length;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     while(--pathLen >= 0 && (undefined !== memoPrev)) {
+//       currentPath = path[pathLen];
+//       memoPrev = memoPrev[currentPath];
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// # 2 while -- - slow - 1142.156ms / 1174.185ms
+// export default function goto(pathArr, fn) {
+//   const path = [].concat(pathArr).reverse();
+//   let pathLen = path.length;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     while((undefined !== memoPrev) && --pathLen >= 0) {
+//       currentPath = path[pathLen];
+//       memoPrev = memoPrev[currentPath];
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// // # 3 while ++ - speed - 991.708ms / 1000.984ms
+// // all: 9751.411ms / all: 9860.670ms
+// export default function goto(path, fn) {
+//   const { length: len } = path;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     let init = 0;
+//     while((undefined !== memoPrev) && (init < len)) {
+//       currentPath = path[init];
+//       memoPrev = memoPrev[currentPath];
+//       init++;
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// # ~3
+// all: 9759.066ms / all: 10400.992ms
+// export default function goto(path, fn) {
+//   const { length: len } = path;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     let init = 0;
+//     while((undefined !== memoPrev) && (init < len)) {
+//       currentPath = path[init++];
+//       memoPrev = memoPrev[currentPath];
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// // # 4 while ++  - 1006.486ms / 994.100ms
+// // all: 9940.216ms / all: 9930.384ms
+// export default function goto(path, fn) {
+//   const { length: len } = path;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     let init = -1;
+//     while((undefined !== memoPrev) && (++init < len)) {
+//       currentPath = path[init];
+//       memoPrev = memoPrev[currentPath];
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// // # 5 do while - 1024.242ms / 1037.621ms
+// export default function goto(path, fn) {
+//   const { length: len } = path;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     let init = 0;
+//     do {
+//       currentPath = path[init];
+//       if (currentPath) {
+//         memoPrev = memoPrev[currentPath];
+//       }
+//     } while ((undefined !== memoPrev) && (++init < len));
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };
+
+// // # 5 for - 1007.966ms / 998.220ms
+// // all: 9906.036ms / all: 10749.440ms
+// export default function goto(path, fn) {
+//   const { length: len } = path;
+//   return function _goto(target) {
+//     let memoPrev = target;
+//     let currentPath;
+//     for (let init = 0; init < len; init++) {
+//       currentPath = path[init];
+//       memoPrev = memoPrev[currentPath];
+//       if (undefined === memoPrev) {
+//         break;
+//       }
+//     }
+//     return fn(memoPrev, currentPath, target);
+//   };
+// };

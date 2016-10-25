@@ -78,7 +78,7 @@ tape('goto(path, fn) - goto path and return fn result', t => {
   t.end();
 });
 
-tape('goto(path, fn) - special test cases', t => {
+tape('goto(path, fn) - special test cases 1', t => {
   t.plan(3);
   const testObj = { a: 'a' };
   bubbleGumGoto([], (value, keyPath, obj) => {
@@ -89,8 +89,45 @@ tape('goto(path, fn) - special test cases', t => {
   t.end();
 });
 
-// tape('goto(path, fn) - throws a exception', t => {
-//   t.plan(2);
-//   t.throws(() => bubbleGumGoto(null, () => {})({}), 'should throws a exception');
-//   t.throws(() => bubbleGumGoto([], null)({}), 'should throws a exception');
-// });
+tape('goto(path, fn) - special test cases 2', t => {
+  t.plan(6);
+  const testObj = new Boolean();
+  testObj.deep = {
+    a: undefined,
+  };
+  bubbleGumGoto(['deep'], (value, keyPath, obj) => {
+    t.same(value, testObj.deep, 'should be empty object with undefined value');
+    t.is(keyPath, 'deep', 'should be "deep"');
+    t.same(obj, testObj, 'should receive testObj like target object');
+  })(testObj);
+
+  bubbleGumGoto(['deep', 'a'], (value, keyPath, obj) => {
+    t.is(value, undefined, 'should be undefined');
+    t.is(keyPath, 'a', 'should be "deep"');
+    t.same(obj, testObj, 'should receive testObj like target object');
+  })(testObj);
+  t.end();
+});
+
+tape('goto(path, fn) - special test cases 2', t => {
+  t.plan(6);
+  const testObj = false;
+  bubbleGumGoto(['deep'], (value, keyPath, obj) => {
+    t.is(value, undefined, 'should be undefined');
+    t.is(keyPath, 'deep', 'should be "deep" keyPaht');
+    t.is(obj, testObj, 'should be false');
+  })(testObj);
+
+  bubbleGumGoto([], (value, keyPath, obj) => {
+    t.is(value, testObj, 'should be false');
+    t.is(keyPath, undefined, 'should be "undefined"');
+    t.is(obj, testObj, 'should be false');
+  })(testObj);
+  t.end();
+});
+
+tape('goto(path, fn) - throws a exception', t => {
+  t.plan(2);
+  t.throws(() => bubbleGumGoto(null, () => {})({}), 'should throws a exception');
+  t.throws(() => bubbleGumGoto([], null)({}), 'should throws a exception');
+});
