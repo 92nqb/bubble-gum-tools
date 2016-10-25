@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const bubbleGumGoto = require('../lib');
 
 function getTarget() {
@@ -11,6 +13,7 @@ function getPath() {
 }
 
 console.time('all');
+console.time('all -- no init prev');
 for (let i = 0; i < 5; i++) {
   console.time('init loop' + i);
   for (let i = 0; i < 10000; i++) {
@@ -18,4 +21,16 @@ for (let i = 0; i < 5; i++) {
   }
   console.timeEnd('init loop' + i);
 }
+console.timeEnd('all -- no init prev');
+
+console.time('all -- init prev');
+for (let i = 0; i < 5; i++) {
+  const fn = bubbleGumGoto(getPath(), () => {});
+  console.time('init loop' + i);
+  for (let i = 0; i < 10000; i++) {
+    fn(getTarget());
+  }
+  console.timeEnd('init loop' + i);
+}
+console.timeEnd('all -- init prev');
 console.timeEnd('all');

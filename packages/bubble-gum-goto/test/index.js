@@ -69,8 +69,28 @@ tape('goto(path, fn) - goto in the undefined path', t => {
   t.end();
 });
 
-tape('goto(path, fn) - throws a exception', t => {
+tape('goto(path, fn) - goto path and return fn result', t => {
   t.plan(2);
-  t.throws(() => bubbleGumGoto(null, () => {})({}), 'should throws a exception');
-  t.throws(() => bubbleGumGoto([], null)({}), 'should throws a exception');
+  const testObj = { a: 'a' };
+  t.ok(bubbleGumGoto(['a'], () => true)(testObj), 'should return true');
+  const testObj2 = { b: testObj };
+  t.is(bubbleGumGoto(['b' ,'a'], () => 'b')(testObj), 'b', 'should return "b"');
+  t.end();
 });
+
+tape('goto(path, fn) - special test cases', t => {
+  t.plan(3);
+  const testObj = { a: 'a' };
+  bubbleGumGoto([], (value, keyPath, obj) => {
+    t.same(value, testObj, 'should receive testObj like value');
+    t.is(keyPath, undefined, 'should be undefined');
+    t.same(obj, testObj, 'should receive testObj like target object');
+  })(testObj);
+  t.end();
+});
+
+// tape('goto(path, fn) - throws a exception', t => {
+//   t.plan(2);
+//   t.throws(() => bubbleGumGoto(null, () => {})({}), 'should throws a exception');
+//   t.throws(() => bubbleGumGoto([], null)({}), 'should throws a exception');
+// });
