@@ -11,5 +11,8 @@
     "dot notation"
   ],
   "author": "Nicolas Quiceno Benavides",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bubble-gum-goto": "^0.0.1"
+  }
 }
