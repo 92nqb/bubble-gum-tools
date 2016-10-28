@@ -10,13 +10,13 @@ const _hasFnStrict = function hasNoStrict(value) {
 
 /**
  * checks if the value exists
- *
- * @param  {Array} path path to property
+ * 
  * @param  {Object} target - object target
+ * @param  {Array} path path to property
  * @param  {Boolean} isStrict
  * @return {Boolean}
  */
-export default function has(path, target, isStrict = false) {
+export default function has(target, path, isStrict = false) {
   (undefined == target) && function(err) {
       throw err;
   }(new TypeError('target shoulds be a valid value'));
