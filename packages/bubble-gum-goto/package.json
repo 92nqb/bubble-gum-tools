@@ -7,8 +7,8 @@
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
     "nested objects",
-    "goto doc path objects",
-    "dot notation"
+    "goto properties",
+    "deep search"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT"
