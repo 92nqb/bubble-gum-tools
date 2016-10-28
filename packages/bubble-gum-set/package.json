@@ -8,8 +8,11 @@
   "keywords": [
     "nested objects",
     "set properties",
-    "dot notation"
+    "deep search"
   ],
   "author": "Nicolas Quiceno Benavides",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bubble-gum-goto": "^0.0.1"
+  }
 }
