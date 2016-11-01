@@ -1,6 +1,6 @@
 /**
  * goto path and call the function
- * 
+ *
  * @param  {Array} path path to property
  * @param  {Function} fn call function in the end of loop
  * @return {*} result of call the callback fn
@@ -11,11 +11,13 @@ export default function goto(path, fn) {
     let memoPrev = target;
     let currentPath;
     let init = 0;
+    let indexPath = 0;
     while((undefined !== memoPrev) && (init < len)) {
       currentPath = path[init];
       memoPrev = memoPrev[currentPath];
+      indexPath = init;
       init++;
     }
-    return fn(memoPrev, currentPath, target);
+    return fn(memoPrev, currentPath, indexPath, target);
   };
 };
