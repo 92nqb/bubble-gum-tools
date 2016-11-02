@@ -9,25 +9,31 @@ import goto from 'bubble-gum-goto';
  * @return {Boolean}
  */
 export default function set(target, path, valueToSet) {
+  (undefined == target || undefined == path) && function(err) {
+      throw err;
+  }(new TypeError('shoulds be a valid value'));
   const _path = [].concat(path);
   const last = _path.pop();
   return goto(_path, function _set(value, currentPath, indexPath, _target) {
     if (undefined === value) {
-      // console.log(value, currentPath, indexPath);
-      // console.log('=============');
-      // console.log(_path.slice(indexPath));
-      // console.log(_path);
-      console.log(_target);
-      _target
-      _path.slice(indexPath).reduce((buildObj, current) => ({
-        [current]: buildObj,
-      }), _target);
-      console.log(_target);
-      //  console.log(a);
-      // _target[currentPath] = _path.slice(indexPath).reduceRight((buildObj, current) => ({
-      //   [current]: buildObj,
-      // }), valueToSet);
+      const init = (Number.isSafeInteger(last) && last >= 0) ?
+        (() => {
+          const arr = [];
+          arr[last] = valueToSet;
+          return arr;
+        })()
+        : { [last]: valueToSet };
 
+      const obj1 = _path.reduceRight((prev, keyPath) => {
+        if (Number.isSafeInteger(keyPath) && keyPath >= 0) {
+          const arr = [];
+          arr[keyPath] = prev
+          return arr;
+        } else {
+          return { [keyPath]: prev };
+        }
+      }, init);
+      Object.assign(_target, obj1);
     } else {
       value[last] = valueToSet;
     }
