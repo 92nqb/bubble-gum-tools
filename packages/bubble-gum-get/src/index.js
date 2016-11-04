@@ -12,7 +12,7 @@ export default function get(target, path, defaultValue) {
   (undefined == target) && function(err) {
       throw err;
   }(new TypeError('target shoulds be a valid value'));
-  return goto(path, function _get(value) {
-    return (undefined === value) ? defaultValue : value;
+  return goto(path, function _get({ current }) {
+    return (undefined === current) ? defaultValue : current;
   })(target);
 };

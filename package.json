@@ -4,6 +4,7 @@
   "description": "tools for working with nested objects",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "clean": "rimraf packages/*/lib",
     "prebuild": "npm run clean",
     "build": "cross-env NODE_PATH=`pwd` node scripts/build",

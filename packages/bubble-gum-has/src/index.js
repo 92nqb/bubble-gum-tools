@@ -1,16 +1,16 @@
 import goto from 'bubble-gum-goto';
 
-const _hasFnNoStrict = function hasNoStrict(value) {
-  return (!!value);
+const _hasFnNoStrict = function hasNoStrict({ current }) {
+  return (!!current);
 };
 
-const _hasFnStrict = function hasNoStrict(value) {
-  return !(value === false || undefined == value);
+const _hasFnStrict = function hasNoStrict({ current }) {
+  return !(current === false || undefined == current);
 };
 
 /**
  * checks if the value exists
- * 
+ *
  * @param  {Object} target - object target
  * @param  {Array} path path to property
  * @param  {Boolean} isStrict
