@@ -8,16 +8,24 @@
 export default function goto(path, fn) {
   const { length: len } = path;
   return function _goto(target) {
-    let memoPrev = target;
-    let currentPath;
+    let previousValue, currentPath, indexPath;
+    let currentValue = target;
     let init = 0;
-    let indexPath = 0;
-    while((undefined !== memoPrev) && (init < len)) {
+    while((undefined !== currentValue) && (init < len)) {
+      if (init > 0) {
+        previousValue = currentValue;
+      }
       currentPath = path[init];
-      memoPrev = memoPrev[currentPath];
+      currentValue = currentValue[currentPath];
       indexPath = init;
       init++;
     }
-    return fn(memoPrev, currentPath, indexPath, target);
+    return fn({
+      current: currentValue,
+      key: currentPath,
+      indexPath,
+      previous: previousValue,
+      target,
+    });
   };
 };
