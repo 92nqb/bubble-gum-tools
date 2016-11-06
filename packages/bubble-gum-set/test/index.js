@@ -28,14 +28,19 @@ tape('set(target, path, valueToSet)', t => {
 });
 
 tape('set(target, path, valueToSet) - should be create the new property with the value', t => {
-  t.plan(2);
+  t.plan(3);
   const testObj = {};
   const secondValue = 'abc';
   bubbleGumSet(testObj, ['a', 'b', 'c'], secondValue);
   t.is(testObj.a.b.c, secondValue, `should be ${secondValue} ["a", "b", "c"]`);
-
   bubbleGumSet(testObj, ['a', 'b', 'd', 'e'], secondValue);
+
   t.is(testObj.a.b.d.e, secondValue, `should be ${secondValue} in ["a", "b", "d", "e"]`);
+  t.same(testObj, {
+    a: {
+      b: { c: 'abc', d: { e: 'abc' } },
+    },
+  }, 'should be the same object');
 });
 
 tape('set(target, path, valueToSet) - should be create the new property with the value in array', t => {
@@ -65,9 +70,35 @@ tape('set(target, path, valueToSet) - should create the new property with the va
   t.same(testObj, { b: { [-1]: { b } } }, 'should create a nested objects');
 });
 
-// exceptions
-// {}, [], 'a' // void path
-// no array in path
+tape('set(target, path, valueToSet) - special case 1', t => {
+  t.plan(1);
+  const testObj = {
+    a: { b: false },
+  };
+  bubbleGumSet(testObj, ['a', 'b', 'c'], 'nico');
+  t.same(testObj, {
+    a: {
+      b: {
+        c: 'nico',
+      },
+    },
+  }, 'should create a nested objects');
+});
+
+tape('set(target, path, valueToSet) - special case 2', t => {
+  t.plan(1);
+  const testObj = {
+    a: { b: 1 },
+  };
+  bubbleGumSet(testObj, ['a', 'b', 'c'], 'nico');
+  t.same(testObj, {
+    a: {
+      b: {
+        c: 'nico',
+      },
+    },
+  }, 'should create a nested objects');
+});
 
 tape('get(path, object, defaultvalueToSet) - throws a exception', t => {
   t.plan(3);

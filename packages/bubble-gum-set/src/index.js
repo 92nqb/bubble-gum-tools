@@ -1,5 +1,29 @@
 import goto from 'bubble-gum-goto';
 
+const assign = Object.assign;
+
+function isObject(value) {
+  return Object(value) === value;
+}
+
+function build(index, value) {
+  if (Number.isSafeInteger(index) && index >= 0) {
+    const arr = [];
+    arr[index] = value;
+    return arr;
+  }
+
+  return { [index]: value };
+}
+
+function buildIn(path, finalValue) {
+  const _path = [].concat(path);
+  const last = _path.pop();
+  const init = build(last, finalValue);
+  return _path.reduceRight((prev, keyPath) => build(keyPath, prev), init);
+}
+
+
 /**
  * checks if the value exists
  *
@@ -14,28 +38,14 @@ export default function set(target, path, valueToSet) {
   }(new TypeError('shoulds be a valid value'));
   const _path = [].concat(path);
   const last = _path.pop();
-  return goto(_path, function _set(value, currentPath, indexPath, _target) {
-    if (undefined === value) {
-      const init = (Number.isSafeInteger(last) && last >= 0) ?
-        (() => {
-          const arr = [];
-          arr[last] = valueToSet;
-          return arr;
-        })()
-        : { [last]: valueToSet };
-
-      const obj1 = _path.reduceRight((prev, keyPath) => {
-        if (Number.isSafeInteger(keyPath) && keyPath >= 0) {
-          const arr = [];
-          arr[keyPath] = prev
-          return arr;
-        } else {
-          return { [keyPath]: prev };
-        }
-      }, init);
-      Object.assign(_target, obj1);
+  goto(_path, function _set({ current, key, indexPath, previous = target }) {
+    if (undefined === current) {
+      return assign(previous, buildIn(_path.slice(indexPath), build(last, valueToSet)));
+    }
+    if (Array.isArray(current) || isObject(current)) {
+      current[last] = valueToSet;
     } else {
-      value[last] = valueToSet;
+      previous[key] = build(last, valueToSet);
     }
   })(target);
 };
