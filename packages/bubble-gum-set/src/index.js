@@ -13,7 +13,9 @@ function build(index, value) {
     return arr;
   }
 
-  return { [index]: value };
+  return {
+    [index]: value
+  };
 }
 
 function buildIn(path, finalValue) {
@@ -23,6 +25,17 @@ function buildIn(path, finalValue) {
   return _path.reduceRight((prev, keyPath) => build(keyPath, prev), init);
 }
 
+function getType(value) {
+  if (isObject(value)) {
+    return 'OBJECT';
+  } else if (Array.isArray(value)) {
+    return 'ARRAY';
+  } else if (undefined === value) {
+    return 'UNDEFINED';
+  } else {
+    return 'OTHERS';
+  }
+}
 
 /**
  * checks if the value exists
@@ -34,18 +47,21 @@ function buildIn(path, finalValue) {
  */
 export default function set(target, path, valueToSet) {
   (undefined == target || undefined == path) && function(err) {
-      throw err;
+    throw err;
   }(new TypeError('shoulds be a valid value'));
   const _path = [].concat(path);
   const last = _path.pop();
   goto(_path, function _set({ current, key, indexPath, previous = target }) {
-    if (undefined === current) {
-      return assign(previous, buildIn(_path.slice(indexPath), build(last, valueToSet)));
-    }
-    if (Array.isArray(current) || isObject(current)) {
-      current[last] = valueToSet;
-    } else {
-      previous[key] = build(last, valueToSet);
+    switch (getType(current)) {
+      case 'OBJECT':
+      case 'ARRAY':
+        current[last] = valueToSet
+        return;
+      case 'UNDEFINED':
+        return assign(previous, buildIn(_path.slice(indexPath), build(last, valueToSet)));
+      default:
+        previous[key] = build(last, valueToSet)
+        return;
     }
   })(target);
 };
