@@ -13,6 +13,7 @@
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT",
   "dependencies": {
-    "bubble-gum-goto": "^0.0.1"
+    "bubble-gum-goto": "^0.0.1",
+    "bubble-gum-create": "^0.0.1"
   }
 }

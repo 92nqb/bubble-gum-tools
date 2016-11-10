@@ -100,7 +100,7 @@ tape('set(target, path, valueToSet) - special case 2', t => {
   }, 'should create a nested objects');
 });
 
-tape('get(path, object, defaultvalueToSet) - throws a exception', t => {
+tape('set(path, object, defaultvalueToSet) - throws a exception', t => {
   t.plan(3);
   t.throws(() => bubbleGumSet(null, ''), new TypeError, 'should throws a exception');
   t.throws(() => bubbleGumSet([], undefined), new TypeError, 'should throws a exception');

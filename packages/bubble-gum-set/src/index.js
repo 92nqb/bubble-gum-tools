@@ -1,28 +1,10 @@
 import goto from 'bubble-gum-goto';
+import create from 'bubble-gum-create';
 
 const assign = Object.assign;
 
 function isObject(value) {
   return Object(value) === value;
-}
-
-function build(index, value) {
-  if (Number.isSafeInteger(index) && index >= 0) {
-    const arr = [];
-    arr[index] = value;
-    return arr;
-  }
-
-  return {
-    [index]: value
-  };
-}
-
-function buildIn(path, finalValue) {
-  const _path = [].concat(path);
-  const last = _path.pop();
-  const init = build(last, finalValue);
-  return _path.reduceRight((prev, keyPath) => build(keyPath, prev), init);
 }
 
 function getType(value) {
@@ -38,12 +20,10 @@ function getType(value) {
 }
 
 /**
- * checks if the value exists
- *
+ * Set a new value in the defined path, if it does not exist create it
  * @param  {Object} target - object target
- * @param  {Array} path path to property
- * @param  {Boolean} isStrict
- * @return {Boolean}
+ * @param  {Array} path - path to property
+ * @param  {any} valueToSet - value to set
  */
 export default function set(target, path, valueToSet) {
   (undefined == target || undefined == path) && function(err) {
@@ -56,12 +36,13 @@ export default function set(target, path, valueToSet) {
       case 'OBJECT':
       case 'ARRAY':
         current[last] = valueToSet
-        return;
+        break;
       case 'UNDEFINED':
-        return assign(previous, buildIn(_path.slice(indexPath), build(last, valueToSet)));
+        assign(previous, create(path.slice(indexPath), valueToSet));
+        break;
       default:
-        previous[key] = build(last, valueToSet)
-        return;
+        previous[key] = create([last], valueToSet)
+        break;
     }
   })(target);
 };
