@@ -16,14 +16,8 @@ tape('create(path, initValue) - basic', t => {
 });
 
 tape('create(path, initValue) - advanced', t => {
-  t.plan(4);
+  t.plan(3);
   [{
-    input: {
-      path: ['a'],
-      initValue: () => ({}),
-    },
-    expected: { a: () => ({}) },
-  }, {
     input: {
       path: ['a', 'a', 'a'],
       initValue: null,
@@ -60,45 +54,63 @@ tape('create(path, initValue) - working with numbers', t => {
       path: [0, 2, 0],
       initValue: true,
     },
-    expected: [
-      [
-        undefined,
-        undefined,
-        [true],
-      ]
-    ],
+    expected: [[ , , [true]]],
   }, {
     input: {
       path: [2, 0, 2, 'a'],
       initValue: {},
     },
-    expected: [
-      undefined,
-      undefined,
-      [[
-        undefined,
-        undefined,
-        { a: {} }
-      ]]
-    ],
+    expected: [ , , [[ , , {a: {}}]]],
   }].forEach(({ input: { path, initValue } , expected }) => t.same(
-    bubbleGumCreate(path, initValue), expected, 'shoulds return a new object with c property')
+    bubbleGumCreate(path, initValue), expected, 'shoulds return a array object with value in specific path')
   );
   t.end();
 });
 
-tape('create(path, initValue) - special cases', t => {
+tape('create(path, initValue) - special cases 1 - various', t => {
   t.plan(4);
   t.same(bubbleGumCreate([], 'initValue'), {}, 'shoulds return empty object');
   t.same(bubbleGumCreate(['a', 'b'], undefined), { a: {} }, 'shoulds return object with "a" property');
   t.same(bubbleGumCreate([-1, 0], 0), { [-1]: [0] }, 'shoulds return object with "-1" property');
-  t.same(bubbleGumCreate([undefined], 0), { [undefined]: 0 }, 'shoulds return object with "-1" property');
-  t.same(bubbleGumCreate([NaN], NaN), { [NaN]: NaN }, 'shoulds return object with "-1" property');
+  t.same(bubbleGumCreate([undefined], 0), { [undefined]: 0 }, 'shoulds return object with "undefined" property');
 });
 
-tape('get(target, path, defaultValue) - throws a exception', t => {
-  t.plan(3);
-  t.throws(() => bubbleGumCreate('', null), new TypeError, 'should throws a exception');
-  t.throws(() => bubbleGumCreate(undefined, []), new TypeError, 'should throws a exception because the "target" is undefined');
-  t.throws(() => bubbleGumCreate(null, []), new TypeError, 'should throws a exception because the "target" is null');
+tape('create(path, initValue) - special cases 2 - NaN', t => {
+  t.plan(2);
+  const objCreated = bubbleGumCreate([NaN], NaN);
+  t.ok(isNaN((Object.keys(objCreated)[0])), 'the key shoulds be "NaN"');
+  t.ok(Number.isNaN(objCreated[NaN]), 'the property in "NaN" key shoulds be "NaN"');
+  t.end();
+});
+
+tape('create(path, initValue) - special cases 3 - functions', t => {
+  t.plan(5);
+
+  const { fn1 } = bubbleGumCreate(['fn1'], function fn1() {});
+  t.is(typeof fn1, 'function', 'fn1 property shoulds be a function');
+
+  const [ fn2 ] = bubbleGumCreate([0], function fn2() {});
+  t.is(typeof fn2, 'function', 'fn2 property shoulds be a function');
+
+  const { arrowfn } = bubbleGumCreate(['arrowfn'],  () => {});
+  t.is(typeof arrowfn, 'function', 'arrowfn property shoulds be a function');
+
+  const { anonymous } = bubbleGumCreate(['anonymous'],  function(){});
+  t.is(typeof anonymous, 'function', 'anonymous property shoulds be a function');
+  t.is(anonymous.name, '', 'anonymous property shoulds be a anonymous function');
+
+  t.end();
+});
+
+tape('create(path, initValue) - throws a exception', t => {
+  t.plan(5);
+  [
+    '',
+    null,
+    false,
+    {},
+    1
+  ].forEach(data => {
+    t.throws(() => bubbleGumCreate(data), new TypeError, 'should throws a exception because the "path" is not array');
+  });
 });
