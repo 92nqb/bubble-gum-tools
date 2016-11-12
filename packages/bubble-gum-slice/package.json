@@ -8,7 +8,7 @@
   "keywords": [
     "nested objects",
     "slice objects",
-    "dot notation"
+    "array path"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT"
