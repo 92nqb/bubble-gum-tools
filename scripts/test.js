@@ -3,8 +3,9 @@ const requireAll = require('require-all');
 const minimist = require('minimist');
 
 const { _ : packages } = minimist(process.argv.slice(2));
-const PACKAGES_FOLDER= `${process.env.NODE_PATH}/packages`;
+const PACKAGES_FOLDER= `${process.env.PROJECT_PATH}/packages`;
 
+// TODO: ALIAS SUPORT
 function getTestDirs(packages, path) {
   return (packages.length > 0) ?
     packages.map(_package => `${path}/${_package}/test`)

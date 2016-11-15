@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const minimist = require('minimist');
 
 const BABEL_CONFIG_FILE = '.babelrc';
-const PROJECT_ROOT = process.env.NODE_PATH;
+const PROJECT_ROOT = process.env.PROJECT_PATH;
 
 const log = console.log;
 
