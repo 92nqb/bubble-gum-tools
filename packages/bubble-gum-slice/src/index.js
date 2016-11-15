@@ -1,3 +1,5 @@
+import set from 'bubble-gum-set';
+import get from 'bubble-gum-get';
 
 /**
  * Slice the object generating a new object
@@ -9,5 +11,12 @@
  * @return {Object} - Object with new values
  */
 export default function slice(target, config) {
-  // TODO: implement it
+  return config.reduce((splitObject, { path, newPath }) => {
+    const property = get(target, path);
+    if (property === undefined) {
+      return splitObject;
+    }
+    set(splitObject, (newPath || path), property);
+    return splitObject;
+  }, {});
 };

@@ -10,8 +10,8 @@ tape('bubble-gum-slice - api', t => {
 tape('slice(target, config) - base', t => {
   t.plan(2);
   const testObj = {
-    a: 'a'
-    b: 'b'
+    a: 'a',
+    b: 'b',
     deep: {
       deep1: 1,
       deep2: 2,
@@ -32,8 +32,8 @@ tape('slice(target, config) - base', t => {
 tape('slice(target, config) - rename path with "newPath" property in config param', t => {
   t.plan(3);
   const testObj = {
-    a: 'a'
-    b: 'b'
+    a: 'a',
+    b: 'b',
     deep: {
       deep1: 1,
       deep2: 2,
@@ -57,9 +57,9 @@ tape('slice(target, config) - rename path with "newPath" property in config para
 
    t.same(bubbleGumSlice(testObj, [{
      path: ['a'],
-     newPath: ['a', 'b', 'c'];
+     newPath: ['a', 'b', 'c'],
    }]), {
-     a: { b: { c: 'a' } },
+     a: { b: { c: 'a', }, },
    }, 'should create the new object whith the property in "newPath"');
 
    t.end();
@@ -159,20 +159,11 @@ tape('slice(target, config) - special cases / nonexistent path', t => {
 });
 
 tape('slice(target, config) - throws a exception', t => {
-  t.plan(3);
+  t.plan(1);
 
-  t.same(bubbleGumSlice(null, [{
+  t.throws(() => bubbleGumSlice(null, [{
     path: ['b'],
-  }]), {}, 'Should throw a TypeError because the target is invalid');
-
-  t.same(bubbleGumSlice({}, [{
-    path: '',
-  }]), {}, 'Should throw a TypeError because the path is not array');
-
-  t.same(bubbleGumSlice({}, [{
-    path: [''],
-    newPath: '',
-  }]), {}, 'Should throw a TypeError because the newPath is not array');
+  }]), 'Should throw a TypeError because the target is invalid');
 
   t.end();
 });
