@@ -8,7 +8,8 @@
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
     "precoverage": "npm run coverage:clean",
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
-    "test": "cross-env PROJECT_PATH=`pwd` babel-node scripts/test"
+    "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
+    "test:dev": "nodemon -q -w ./packages -x 'npm run test'"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,6 @@
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
-    "babel-tape-runner": "^2.0.1",
     "chalk": "^1.1.3",
     "coveralls": "^2.11.15",
     "cross-env": "^3.1.3",
@@ -42,12 +42,12 @@
     "glob": "^7.1.1",
     "lerna": "2.0.0-beta.30",
     "minimist": "^1.2.0",
-    "require-all": "^2.0.0",
+    "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
-    "tape": "^4.6.2",
-    "nyc": "^9.0.1"
+    "tape": "^4.6.2"
   },
   "scriptsConfig": {
+    "rootDir": "packages",
     "alias": {
       "create": "packages/bubble-gum-create",
       "get": "packages/bubble-gum-get",
