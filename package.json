@@ -2,14 +2,15 @@
   "name": "bubble-gum-tools",
   "version": "0.0.1",
   "description": "tools for working with nested objects",
-  "main": "index.js",
+  "main": "lib/bubbleGum.js",
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
     "precoverage": "npm run coverage:clean",
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
-    "test:dev": "nodemon -q -w ./packages -x 'npm run test'"
+    "test:dev": "nodemon -q -w ./packages -x 'npm run test'",
+    "build": "./scripts/bootstrap.sh"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,10 @@
     "minimist": "^1.2.0",
     "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-npm": "^2.0.0",
     "tape": "^4.6.2"
   },
   "scriptsConfig": {
