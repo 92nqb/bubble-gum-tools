@@ -2,7 +2,7 @@
   "name": "bubble-gum-tools",
   "version": "0.0.1",
   "description": "tools for working with nested objects",
-  "main": "lib/bubbleGum.js",
+  "main": "lib/bubble-gum.js",
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
@@ -10,7 +10,17 @@
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
     "test:dev": "nodemon -q -w ./packages -x 'npm run test'",
-    "build": "./scripts/bootstrap.sh"
+    "clean:bundle": "rimraf ./lib && mkdir lib || true",
+    "es6:bundle": "babel ./lib/bubble-gum.js --out-file ./lib/bubble-gum.js",
+    "prebuild:bundle": "npm run clean:bundle",
+    "build:bundle": "node scripts/build-bundle.js",
+    "postbuild:bundle": "npm run es6:bundle",
+
+    "clean:packages": "rimraf ./packages/*/lib",
+    "es6:packages": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-es6.js",
+    "prebuild:packages": "npm run clean:packages",
+    "build:packages": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages.js",
+    "postbuild:packages": "npm run es6:packages"
   },
   "repository": {
     "type": "git",
@@ -46,9 +56,7 @@
     "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
     "rollup": "^0.36.3",
-    "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-npm": "^2.0.0",
     "tape": "^4.6.2"
   },
   "scriptsConfig": {
