@@ -1,4 +1,4 @@
-import goto from 'bubble-gum-goto';
+import goto from '../../bubble-gum-goto/src';
 
 const _hasFnNoStrict = function hasNoStrict({ current }) {
   return (!!current);

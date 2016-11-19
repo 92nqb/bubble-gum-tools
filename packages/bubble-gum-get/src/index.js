@@ -1,4 +1,4 @@
-import goto from 'bubble-gum-goto';
+import goto from '../../bubble-gum-goto/src';
 
 /**
  * get the value at the end of path

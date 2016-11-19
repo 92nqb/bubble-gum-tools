@@ -1,5 +1,5 @@
-import set from 'bubble-gum-set';
-import get from 'bubble-gum-get';
+import set from '../../bubble-gum-set/src';
+import get from '../../bubble-gum-get/src';
 
 /**
  * Slice the object generating a new object

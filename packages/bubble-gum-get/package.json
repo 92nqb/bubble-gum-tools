@@ -11,8 +11,5 @@
     "deep search"
   ],
   "author": "Nicolas Quiceno Benavides",
-  "license": "MIT",
-  "dependencies": {
-    "bubble-gum-goto": "^0.0.1"
-  }
+  "license": "MIT"
 }

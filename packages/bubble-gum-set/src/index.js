@@ -1,5 +1,5 @@
-import goto from 'bubble-gum-goto';
-import create from 'bubble-gum-create';
+import goto from '../../bubble-gum-goto/src';
+import create from '../../bubble-gum-create/src';
 
 const assign = Object.assign;
 
