@@ -1,7 +1,9 @@
 scripts
 packages
 coverage
+lerna.json
+todos.md
 .nyc_output
 .editorconfig
 .babelrc
-lerna.json
+.nvmrc
