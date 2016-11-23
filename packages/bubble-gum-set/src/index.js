@@ -1,7 +1,5 @@
-import goto from 'bubble-gum-goto';
-import create from 'bubble-gum-create';
-
-const assign = Object.assign;
+import goto from '../../bubble-gum-goto/src';
+import create from '../../bubble-gum-create/src';
 
 function isObject(value) {
   return Object(value) === value;
@@ -39,7 +37,7 @@ export default function set(target, path, valueToSet) {
         current[last] = valueToSet
         break;
       case 'UNDEFINED':
-        assign(previous, create(path.slice(indexPath), valueToSet));
+        Object.assign(previous, create(path.slice(indexPath), valueToSet));
         break;
       default:
         previous[key] = create([last], valueToSet)

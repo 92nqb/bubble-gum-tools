@@ -11,9 +11,5 @@
     "array path"
   ],
   "author": "Nicolas Quiceno Benavides",
-  "license": "MIT",
-  "dependencies": {
-    "bubble-gum-set": "^0.0.1",
-    "bubble-gum-get": "^0.0.1"
-  }
+  "license": "MIT"
 }
