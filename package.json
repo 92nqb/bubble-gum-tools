@@ -6,21 +6,18 @@
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
-    "precoverage": "npm run coverage:clean",
-    "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
+    "coverage": "npm run coverage:clean && nyc --reporter=lcov --reporter=text-summary npm run test",
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
     "test:dev": "nodemon -q -w ./packages -x 'npm run test'",
-    "clean:bundle": "rimraf ./lib && mkdir lib || true",
-    "es6:bundle": "babel ./lib/bubble-gum.js --out-file ./lib/bubble-gum.js",
-    "prebuild:bundle": "npm run clean:bundle",
-    "build:bundle": "node scripts/build-bundle.js",
-    "postbuild:bundle": "npm run es6:bundle",
-
-    "clean:packages": "rimraf ./packages/*/lib",
-    "es6:packages": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-es6.js",
-    "prebuild:packages": "npm run clean:packages",
-    "build:packages": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages.js",
-    "postbuild:packages": "npm run es6:packages"
+    "bundle:clean": "rimraf ./lib && mkdir lib || true",
+    "bundle:es5": "babel ./lib/bubble-gum.js --out-file ./lib/bubble-gum.js",
+    "bundle:join": "node scripts/build-bundle.js",
+    "bundle:build": "npm run bundle:clean && npm run bundle:join && npm run bundle:es5",
+    "packages:clean": "rimraf ./packages/*/lib",
+    "packages:es5": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-es5.js",
+    "packages:join": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages.js",
+    "packages:build": "npm run packages:clean && npm run packages:join && npm run packages:es5",
+    "clean:all": "npm run coverage:clean && npm run bundle:clean && npm run packages:clean"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,6 @@ require('babel-register');
 require('babel-polyfill');
 
 // npm run test <alias> - get set slice create has goto 
-
 const glob = require('glob');
 const minimist = require('minimist');
 const { alias, rootDir } = require('../package.json').scriptsConfig;
