@@ -13,10 +13,12 @@
     "bundle:es5": "babel ./lib/bubble-gum.js --out-file ./lib/bubble-gum.js",
     "bundle:join": "node scripts/build-bundle.js",
     "bundle:build": "npm run bundle:clean && npm run bundle:join && npm run bundle:es5",
+    "bundle:publish": "npm run bundle:build && npm publish",
     "packages:clean": "rimraf ./packages/*/lib",
     "packages:es5": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-es5.js",
     "packages:join": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages.js",
     "packages:build": "npm run packages:clean && npm run packages:join && npm run packages:es5",
+    "packages:publish": "npm run packages:build && lerna publish",
     "clean:all": "npm run coverage:clean && npm run bundle:clean && npm run packages:clean"
   },
   "repository": {

@@ -7,3 +7,4 @@ todos.md
 .editorconfig
 .babelrc
 .nvmrc
+.travis.yml
