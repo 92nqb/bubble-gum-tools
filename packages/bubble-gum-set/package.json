@@ -1,19 +1,16 @@
 {
-  "name": "bubble-gum-set",
+  "name": "bubble-gum-tools.set",
   "version": "0.0.1",
-  "description": "set properties in nested objects",
+  "description": "Set property in nested object",
   "main": "lib/index.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-set",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
-    "nested objects",
-    "set properties",
-    "deep search"
+    "nested-objects",
+    "set-property",
+    "array-path",
+    "bubble-gum-tools-modularized"
   ],
   "author": "Nicolas Quiceno Benavides",
-  "license": "MIT",
-  "dependencies": {
-    "bubble-gum-goto": "^0.0.1",
-    "bubble-gum-create": "^0.0.1"
-  }
+  "license": "MIT"
 }

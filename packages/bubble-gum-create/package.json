@@ -1,14 +1,15 @@
 {
-  "name": "bubble-gum-create",
+  "name": "bubble-gum-tools.create",
   "version": "0.0.1",
-  "description": "nested objects created by array path",
+  "description": "Nested object created by array path",
   "main": "lib/index.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-create",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
-    "nested objects",
-    "create objects",
-    "array path"
+    "nested-objects",
+    "create-nested-objects",
+    "array-path",
+    "bubble-gum-tools-modularized"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT"

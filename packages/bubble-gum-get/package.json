@@ -1,14 +1,16 @@
 {
-  "name": "bubble-gum-get",
+  "name": "bubble-gum-tools.get",
   "version": "0.0.1",
-  "description": "get properties in nested objects",
+  "description": "Get property in nested objects",
   "main": "lib/index.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-get",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
-    "nested objects",
-    "get property",
-    "deep search"
+    "nested-objects",
+    "array-path",
+    "get-property",
+    "deep-search",
+    "bubble-gum-tools-modularized"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT"

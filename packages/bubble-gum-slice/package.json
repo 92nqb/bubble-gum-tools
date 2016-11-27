@@ -1,14 +1,15 @@
 {
-  "name": "bubble-gum-slice",
+  "name": "bubble-gum-tools.slice",
   "version": "0.0.1",
-  "description": "slice objects",
+  "description": "Slice objects",
   "main": "lib/index.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-slice",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [
-    "nested objects",
-    "slice objects",
-    "array path"
+    "nested-objects",
+    "slice-objects",
+    "array-path",
+    "bubble-gum-tools-modularized"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT"

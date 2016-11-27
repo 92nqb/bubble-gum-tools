@@ -1,8 +1,8 @@
 {
   "name": "bubble-gum-tools",
   "version": "0.0.1",
-  "description": "tools for working with nested objects",
-  "main": "lib/bubble-gum.js",
+  "description": "Work with nested objects is easy with a bubble-gum",
+  "main": "lib/bubble-gum-tools.js",
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
@@ -10,7 +10,7 @@
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
     "test:dev": "nodemon -q -w ./packages -x 'npm run test'",
     "bundle:clean": "rimraf ./lib && mkdir lib || true",
-    "bundle:es5": "babel ./lib/bubble-gum.js --out-file ./lib/bubble-gum.js",
+    "bundle:es5": "babel ./lib/bubble-gum-tools.js --out-file ./lib/bubble-gum-tools.js",
     "bundle:join": "node scripts/build-bundle.js",
     "bundle:build": "npm run bundle:clean && npm run bundle:join && npm run bundle:es5",
     "bundle:publish": "npm run bundle:build && npm publish",
@@ -30,10 +30,9 @@
     "utils",
     "nested",
     "objects",
-    "objects",
-    "deep",
-    "dot",
-    "notation"
+    "nested-objects",
+    "array-path",
+    "bubble-gum-tools"
   ],
   "author": "Nicolas Quiceno Benavides",
   "license": "MIT",

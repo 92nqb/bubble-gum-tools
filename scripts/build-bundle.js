@@ -6,8 +6,8 @@ rollup.rollup({
   plugins: [resolve()]
 }).then(bundle => bundle.write({
   format: 'cjs',
-  moduleName: 'bubble-gum',
-  dest: 'lib/bubble-gum.js'
+  moduleName: 'bubble-gum-tools',
+  dest: 'lib/bubble-gum-tools.js'
 })).catch(err => {
   console.error(err.stack);
   process.exit(1);
