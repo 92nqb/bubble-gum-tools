@@ -15,9 +15,9 @@ function callRollup({entryPath, outputPath, name}) {
     entry: entryPath + '/index.js',
     plugins: [resolve()]
   }).then(bundle => bundle.write({
-    format: 'cjs',
+    format: 'es',
     moduleName: name,
-    dest: outputPath + '/index.js'
+    dest: outputPath + '/index.es2015.js'
   })).catch(err => {
     console.error(err);
     process.exit(1);

@@ -1,5 +1,4 @@
 const babel = require('babel-core');
-const glob = require('glob');
 const minimist = require('minimist');
 const fs = require('fs-extra');
 const chalk = require('chalk');
@@ -8,6 +7,7 @@ const PROJECT_PATH = process.env.PROJECT_PATH;
 const { _ : packagesAlias } = minimist(process.argv.slice(2));
 const { alias, rootDir } = require('../package.json').scriptsConfig;
 
+const ES2015_FILE = 'index.es2015.js';
 const MAIN_FILE = 'index.js';
 const BABEL_FILE = '.babelrc';
 const TARGET_FOLDER = 'lib';
@@ -39,6 +39,7 @@ function getPackageRootPath(_package) {
 function getPackagePaths(_package) {
   return {
     babelConfig: `${_package}/${BABEL_FILE}`,
+    targetES2015: `${_package}/${TARGET_FOLDER}/${ES2015_FILE}`,
     targetPath: `${_package}/${TARGET_FOLDER}/${MAIN_FILE}`,
   };
 }
@@ -59,12 +60,6 @@ function toES6File(targetPath, babelRC) {
   }, babelRC));
 }
 
-function deleteFile(targetPath) {
-  console.log(`remove - ${targetPath}`);
-  fs.removeSync(targetPath);
-  return true;
-}
-
 function writeFile({ targetPath, es5File: { code: es5code } }) {
   console.log(`write - ${targetPath}`);
   fs.outputFileSync(targetPath, es5code);
@@ -75,17 +70,13 @@ function run() {
   const _packages = (packagesAlias.length === 0) ?
     Object.keys(alias) : packagesAlias;
   getPackages(_packages)
-    .map(({babelConfig, targetPath}) => ({
+    .map(({babelConfig, targetES2015, targetPath}) => ({
       babelConfig: getBabelConfig(babelConfig),
       targetPath,
+      targetES2015,
     }))
-    .map(({ babelConfig, targetPath }) => ({
-      es5File: toES6File(targetPath, babelConfig),
-      targetPath,
-    }))
-    .map(({ es5File, targetPath }) => ({
-      isDelete: deleteFile(targetPath),
-      es5File,
+    .map(({babelConfig, targetES2015, targetPath}) => ({
+      es5File: toES6File(targetES2015, babelConfig),
       targetPath,
     }))
     .forEach(writeFile)

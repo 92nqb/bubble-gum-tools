@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Get property in nested objects",
   "main": "lib/index.js",
+  "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-get",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [

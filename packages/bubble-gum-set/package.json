@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Set property in nested object",
   "main": "lib/index.js",
+  "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-set",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "keywords": [

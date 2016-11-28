@@ -5,9 +5,9 @@ rollup.rollup({
   entry: 'packages/index.js',
   plugins: [resolve()]
 }).then(bundle => bundle.write({
-  format: 'cjs',
+  format: 'es',
   moduleName: 'bubble-gum-tools',
-  dest: 'lib/bubble-gum-tools.js'
+  dest: 'lib/bubble-gum-tools.es2015.js'
 })).catch(err => {
   console.error(err.stack);
   process.exit(1);
