@@ -16,11 +16,11 @@ function getInitValue(path, initValue, last) {
 }
 
 /**
- * Creates a new object or array with an initial value in function of a path
+ * Creates a new object or a new array with an initial value in function of a array path
  *
- * @param {*[]} path - array path with the structure of the new object
+ * @param {Array} path - array path with the structure of the new object
  * @param {*} initValue - value that will contain the last property in the path
- * @return {Object|*[]} - value created
+ * @return {Object|Array} - value created
  */
 export default function create(path, initValue) {
   (!Array.isArray(path)) && function(err) {

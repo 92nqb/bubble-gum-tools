@@ -23,17 +23,47 @@ Or you can also get a [modularized package per each method](https://www.npmjs.co
 ```js
 const bubbleGumTools = require('bubble-gum-tools');
 
-bubbleGumTools.create
+const nestedObj = {
+  root: [{
+    foo: 'bar',
+  }],
+};
 
-bubbleGumTools.get
+const foo = bubbleGumTools.get(nestedObj, ['root', 0, 'foo']);
+console.log(foo);   //  => 'bar'
 
-bubbleGumTools.goto
+const existsFoo = bubbleGumTools.has(nestedObj, ['root', 0, 'foo']);
+console.log(existsFoo); // => true
 
-bubbleGumTools.has
+bubbleGumTools.set(nestedObj, ['root', 0, 'foo'], 'newBar');
+console.log(nestedObj);   //  => {
+                          //       root: [{
+                          //         foo: 'newBar',
+                          //       }],
+                          //     }
 
-bubbleGumTools.set
+const sObject = bubbleGumTools.slice(nestedObj, [{
+  path: ['root', 0, 'foo'],
+  newPath: ['newFoo'],
+}]);
+console.log(sObject);   // => {
+                        //      newFoo: 'newBar'
+                        //    }
 
-bubbleGumTools.slice
+
+const cObject = bubbleGumTools.create(['other-root', 0, 'other-foo'], 'other-bar');
+console.log(cObject);   // => {
+                        //     'other-root': [{
+                        //       'other-foo': 'other-bar'
+                        //     }]
+                        //   }
+
+const resultGOTO = bubbleGumTools.goto(['other-root', 0, 'other-foo'], ({ current, key }) => ({
+  [key]: current,
+}))(cObject);
+console.log(resultGOTO);  //  =>  {
+                          //        'other-foo': 'other-bar'
+                          //      }
 
 ```
 
@@ -48,6 +78,8 @@ bubbleGumTools.slice
 
 ## TODOS
 
+* [ ] Add method to compare objects in depth
+* [ ] Add method to clone objects in depth
 
 ## License
 

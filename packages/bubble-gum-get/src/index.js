@@ -1,11 +1,11 @@
 import goto from '../../bubble-gum-goto/src';
 
 /**
- * get the value at the end of path
+ * Get the value at the end of path
  *
- * @param {(Object|*[])} target - object target
- * @param {*[]} path - array path to property
- * @param {*=} defaultValue - default value if the param received is undefined
+ * @param {Object|Array} target - object target
+ * @param {Array} path - array path to property
+ * @param {*} [defaultValue] - default value if the param received is undefined
  * @return {*}
  */
 export default function get(target, path, defaultValue) {

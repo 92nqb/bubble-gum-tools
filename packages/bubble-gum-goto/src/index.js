@@ -4,17 +4,17 @@
  * @callback actionCallback
  * @param {Object} options - values in the end of loop
  * @param {Number} options.indexPath
- * @param {*=} options.current
- * @param {*=} options.key
- * @param {*=} options.previous
- * @param {(Object|*[])} options.target
+ * @param {Object|Array} options.target
+ * @param {*} [options.current]
+ * @param {*} [options.key]
+ * @param {*} [options.previous]
  * @return {*}
  */
 
 /**
- * goto path and call the function
+ * Goto path and call the function (actionCallback)
  *
- * @param {*[]} path - array path to property in target
+ * @param {Array} path - array path to property in target
  * @param {actionCallback} fn - call function in the end of loop
  * @return {*} result of call the callback fn
  */
@@ -24,7 +24,7 @@ export default function goto(path, fn) {
   /**
    * Callback that will receive the target to go
    *
-   * @param {(Object|*[])} target
+   * @param {Object|Array} target
    */
   return function _goto(target) {
     let previousValue, currentPath, indexPath;

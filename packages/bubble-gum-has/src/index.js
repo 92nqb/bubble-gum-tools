@@ -9,10 +9,10 @@ const _hasFnStrict = function hasNoStrict({ current }) {
 };
 
 /**
- * checks if the value exists
+ * Checks if the value exists
  *
- * @param {(Object|*[])} target - object target
- * @param {*[]} path - array path to property in target
+ * @param {Object|Array} target - object target
+ * @param {Array} path - array path to property in target
  * @param {Boolean} [isStrict=false] - The check is strict
  * @return {Boolean} - Returns if exists or not
  */

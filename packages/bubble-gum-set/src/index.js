@@ -20,8 +20,8 @@ function getType(value) {
 /**
  * Set a new value in the defined path, if it does not exist create it
  *
- * @param {(Object|*[])} target - object target
- * @param {*[]} path - array path to property in target
+ * @param {Object|Array} target - object target
+ * @param {Array} path - array path to property in target
  * @param {*} valueToSet - value to set in target
  */
 export default function set(target, path, valueToSet) {
