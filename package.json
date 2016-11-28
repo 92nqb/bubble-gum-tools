@@ -6,7 +6,9 @@
   "jsnext:main": "lib/bubble-gum-tools.es2015.js",
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
-    "docs": "jsdoc lib/bubble-gum-tools.es2015.js",
+    "docs:clean": "rimraf ./docs/api && mkdir -p ./docs/api || true",
+    "docs:build": "jsdoc -c ./.jsdoc.json",
+    "docs": "npm run docs:clean && npm run docs:build",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
     "coverage": "npm run coverage:clean && nyc --reporter=lcov --reporter=text-summary npm run test",
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
