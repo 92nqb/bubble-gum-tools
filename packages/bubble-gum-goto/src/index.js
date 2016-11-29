@@ -3,16 +3,49 @@
  *
  * @callback actionCallback
  * @param {Object} options - values in the end of loop
- * @param {Number} options.indexPath
- * @param {Object|Array} options.target
- * @param {*} [options.current]
- * @param {*} [options.key]
- * @param {*} [options.previous]
+ * @param {Number} options.indexPath - index in the array path
+ * @param {Object|Array} options.target - target object
+ * @param {*} [options.current] - current value in target object
+ * @param {*} [options.key] - current value in the array path
+ * @param {*} [options.previous] - previous value in target object
  * @return {*}
  */
 
 /**
  * Goto path and call the function (actionCallback)
+ *
+ * @alias module:bubble-gum-tools.goto
+ * @example
+ *
+ * ```javascript
+ *
+ * const goto = require('bubble-gum-tools').goto;
+ *
+ * const target = {
+ *   root: {
+ *     foo: 'bar',
+ *   },
+ * };
+ *
+ * goto(['root', 'foo'], (result) => {
+ *   const {
+ *     indexPath,
+ *     previous,
+ *     target,
+ *     current,
+ *     key,
+ *   } = result;
+ *   console.log(indexPath);  // =>  1
+ *   console.log(previous);  // => { foo: 'bar' }
+ *   console.log(target);  // => { root: { foo: 'bar' }, arr: [ [ [Object] ] ] }
+ *   console.log(current);  // => bar
+ *   console.log(key);  // => foo
+ * })(target);
+ *
+ * const result = goto(['root', 'foo'], ({current, key}) => (current + '-' + key))(target);
+ * console.log(result); // => bar-foo
+ *
+ * ```
  *
  * @param {Array} path - array path to property in target
  * @param {actionCallback} fn - call function in the end of loop

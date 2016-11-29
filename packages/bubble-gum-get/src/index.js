@@ -2,6 +2,36 @@ import goto from '../../bubble-gum-goto/src';
 
 /**
  * Get the value at the end of path
+ * 
+ * @alias module:bubble-gum-tools.get
+ * @example
+ *
+ * ```javascript
+ *
+ *  const get = require('bubble-gum-tools').get;
+ *
+ *  const target = {
+ *    root: {
+ *      foo: 'bar',
+ *    },
+ *    arr: [[
+ *      ['baz'],
+ *    ]],
+ *  };
+ *
+ *  // Working with nested objects
+ *  const bar = get(target, ['root', 'foo']);
+ *  console.log(bar); // => 'bar'
+ *
+ *  // Working with nested arrays
+ *  const baz = get(target, ['arr', 0, 0, 0]);
+ *  console.log(baz); // => 'baz'
+ *
+ *  // Set a default
+ *  const defaultVal = get(target, ['no', 'defined'], 'default');
+ *  console.log(defaultVal); // => 'default'
+ *
+ * ```
  *
  * @param {Object|Array} target - object target
  * @param {Array} path - array path to property
