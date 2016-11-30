@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.has",
+  "name": "bubble-gum-has",
   "version": "0.0.1",
   "description": "Check if a property exists in nested object",
   "main": "lib/index.js",

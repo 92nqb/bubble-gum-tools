@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.get",
+  "name": "bubble-gum-get",
   "version": "0.0.1",
   "description": "Get property in nested objects",
   "main": "lib/index.js",

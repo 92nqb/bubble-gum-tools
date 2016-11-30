@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.set",
+  "name": "bubble-gum-set",
   "version": "0.0.1",
   "description": "Set property in nested object",
   "main": "lib/index.js",

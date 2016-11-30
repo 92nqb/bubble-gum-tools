@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.goto",
+  "name": "bubble-gum-goto",
   "version": "0.0.1",
   "description": "Goto to property in nested object and execute a callback",
   "main": "lib/index.js",

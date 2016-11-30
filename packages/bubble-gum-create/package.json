@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.create",
+  "name": "bubble-gum-create",
   "version": "0.0.1",
   "description": "Nested object created by array path",
   "main": "lib/index.js",

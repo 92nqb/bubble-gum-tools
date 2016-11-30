@@ -1,5 +1,5 @@
 {
-  "name": "bubble-gum-tools.slice",
+  "name": "bubble-gum-slice",
   "version": "0.0.1",
   "description": "Slice objects",
   "main": "lib/index.js",
