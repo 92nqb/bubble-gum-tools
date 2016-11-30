@@ -1,6 +1,5 @@
 const rollup = require('rollup');
 const resolve = require('rollup-plugin-node-resolve');
-const glob = require('glob');
 const minimist = require('minimist');
 const { alias } = require('../package.json').scriptsConfig;
 const { _ : packagesAlias } = minimist(process.argv.slice(2));
