@@ -62,7 +62,7 @@ tape('create(path, initValue) - working with numbers', t => {
     },
     expected: [ , , [[ , , {a: {}}]]],
   }].forEach(({ input: { path, initValue } , expected }) => t.same(
-    bubbleGumCreate(path, initValue), expected, 'shoulds return a array object with value in specific path')
+    bubbleGumCreate(path, initValue), expected, 'shoulds return an array object with value in specific path')
   );
   t.end();
 });

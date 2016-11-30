@@ -9,7 +9,7 @@ const _hasFnStrict = function hasNoStrict({ current }) {
 };
 
 /**
- * Checks if the value exists
+ * It checks if the property exists in a nested object or a nested array using an array path
  * @alias module:bubble-gum-tools.has
  * @example
  *
@@ -93,10 +93,10 @@ const _hasFnStrict = function hasNoStrict({ current }) {
  *
  * ```
  *
- * @param {Object|Array} target - object target
- * @param {Array} path - array path to property in target
- * @param {Boolean} [isStrict=false] - The check is strict
- * @return {Boolean}  Returns if exists or not
+ * @param {Object|Array} target - Target object or target array
+ * @param {Array} path - Path to property
+ * @param {Boolean} [isStrict=false] - is strict
+ * @return {Boolean} exists - Returns if the property exists
  */
 export default function has(target, path, isStrict = false) {
   (undefined == target) && function(err) {

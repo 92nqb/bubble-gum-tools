@@ -1,8 +1,8 @@
 import goto from '../../bubble-gum-goto/src';
 
 /**
- * Get the value at the end of path
- * 
+ * It gets a property from a nested object or a nested array using an array path
+ *
  * @alias module:bubble-gum-tools.get
  * @example
  *
@@ -33,10 +33,10 @@ import goto from '../../bubble-gum-goto/src';
  *
  * ```
  *
- * @param {Object|Array} target - object target
- * @param {Array} path - array path to property
- * @param {*} [defaultValue] - default value if the param received is undefined
- * @return {*}
+ * @param {Object|Array} target - Target object or target array
+ * @param {Array} path - Path to property
+ * @param {*} [defaultValue] - Value to be returned in case the property does not exist
+ * @return {*} propertyValue
  */
 export default function get(target, path, defaultValue) {
   (undefined == target) && function(err) {

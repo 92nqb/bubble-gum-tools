@@ -82,7 +82,7 @@ console.log(resultGOTO); // => { 'other-foo': 'other-bar' }
 * [bubble-gum-tools](#module_bubble-gum-tools)
     * [.create(path, initValue)](#module_bubble-gum-tools.create) ⇒ <code>Object</code> &#124; <code>Array</code>
     * [.get(target, path, [defaultValue])](#module_bubble-gum-tools.get) ⇒ <code>\*</code>
-    * [.goto(path, fn)](#module_bubble-gum-tools.goto) ⇒ <code>\*</code>
+    * [.goto(path, fn)](#module_bubble-gum-tools.goto) ⇒ <code>function</code>
     * [.has(target, path, [isStrict])](#module_bubble-gum-tools.has) ⇒ <code>Boolean</code>
     * [.set(target, path, valueToSet)](#module_bubble-gum-tools.set)
     * [.slice(target, config)](#module_bubble-gum-tools.slice) ⇒ <code>Object</code>
@@ -90,15 +90,15 @@ console.log(resultGOTO); // => { 'other-foo': 'other-bar' }
 <a name="module_bubble-gum-tools.create"></a>
 
 ### bubble-gum-tools.create(path, initValue) ⇒ <code>Object</code> &#124; <code>Array</code>
-Creates a new object or a new array with an initial value in function of a array path
+It creates a new object or an initialized array depending on the input path
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
-**Returns**: <code>Object</code> &#124; <code>Array</code> - the new array or object  
+**Returns**: <code>Object</code> &#124; <code>Array</code> - output - The new array or new object with the input path structure  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| path | <code>Array</code> | array path with the structure of the new object |
-| initValue | <code>\*</code> | value that will contain the last property in the path |
+| path | <code>Array</code> | Input path with the structure |
+| initValue | <code>\*</code> | Initial value for the end of the input path structure |
 
 **Example**  
 ```js
@@ -124,15 +124,16 @@ Creates a new object or a new array with an initial value in function of a array
 <a name="module_bubble-gum-tools.get"></a>
 
 ### bubble-gum-tools.get(target, path, [defaultValue]) ⇒ <code>\*</code>
-Get the value at the end of path
+It gets a property from a nested object or a nested array using an array path
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
+**Returns**: <code>\*</code> - propertyValue  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| target | <code>Object</code> &#124; <code>Array</code> | object target |
-| path | <code>Array</code> | array path to property |
-| [defaultValue] | <code>\*</code> | default value if the param received is undefined |
+| target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
+| path | <code>Array</code> | Path to property |
+| [defaultValue] | <code>\*</code> | Value to be returned in case the property does not exist |
 
 **Example**  
 ```javascript
@@ -163,16 +164,18 @@ Get the value at the end of path
 ```
 <a name="module_bubble-gum-tools.goto"></a>
 
-### bubble-gum-tools.goto(path, fn) ⇒ <code>\*</code>
-Goto path and call the function (actionCallback)
+### bubble-gum-tools.goto(path, fn) ⇒ <code>function</code>
+It receives a input path and a callback(actionCallback), It returns the function **_goto**,
+the *_goto* function receives a target object or target array,
+when the *_goto* is called, this navigates the target object or target array using the input path,
+when it reaches the end of the path, *_goto* executs the callback and returns the result
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
-**Returns**: <code>\*</code> - result of call the callback fn  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| path | <code>Array</code> | array path to property in target |
-| fn | <code>[actionCallback](#actionCallback)</code> | call function in the end of loop |
+| path | <code>Array</code> | Path to property |
+| fn | <code>[actionCallback](#actionCallback)</code> | Callback with the action that will be called at the end of the path |
 
 **Example**  
 ```javascript
@@ -207,16 +210,16 @@ console.log(result); // => bar-foo
 <a name="module_bubble-gum-tools.has"></a>
 
 ### bubble-gum-tools.has(target, path, [isStrict]) ⇒ <code>Boolean</code>
-Checks if the value exists
+It checks if the property exists in a nested object or a nested array using an array path
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
-**Returns**: <code>Boolean</code> - Returns if exists or not  
+**Returns**: <code>Boolean</code> - exists - Returns if the property exists  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| target | <code>Object</code> &#124; <code>Array</code> |  | object target |
-| path | <code>Array</code> |  | array path to property in target |
-| [isStrict] | <code>Boolean</code> | <code>false</code> | The check is strict |
+| target | <code>Object</code> &#124; <code>Array</code> |  | Target object or target array |
+| path | <code>Array</code> |  | Path to property |
+| [isStrict] | <code>Boolean</code> | <code>false</code> | is strict |
 
 **Example**  
 ```javascript
@@ -300,15 +303,15 @@ Checks if the value exists
 <a name="module_bubble-gum-tools.set"></a>
 
 ### bubble-gum-tools.set(target, path, valueToSet)
-Set a new value in the defined path, if it does not exist create it
+It sets a new value in a nested object or a nested array using an array path, if the path does not exist create this
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| target | <code>Object</code> &#124; <code>Array</code> | object target |
-| path | <code>Array</code> | array path to property in target |
-| valueToSet | <code>\*</code> | value to set in target |
+| target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
+| path | <code>Array</code> | Path to property |
+| valueToSet | <code>\*</code> | Value to set in target |
 
 **Example**  
 ```javascript
@@ -340,17 +343,17 @@ console.log(target.arr[0][0][1]); // => 'newbaz2'
 <a name="module_bubble-gum-tools.slice"></a>
 
 ### bubble-gum-tools.slice(target, config) ⇒ <code>Object</code>
-Slice the object generating a new object
+It slices a object or an array generating a new object or a new array
 
 **Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
-**Returns**: <code>Object</code> - splitObject - Object with new values  
+**Returns**: <code>Object</code> - slicedObject - New object or new array with sliced values  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| target | <code>Object</code> &#124; <code>Array</code> | object target |
-| config | <code>Array.Object</code> | Array with the configuration of the slice function |
-| config[].path | <code>Array</code> | Array path to the property to be sliced |
-| config[].newPath | <code>Array</code> | Array path to the property in the new object if it is undefined, it will have the same value as the config[].path |
+| target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
+| config | <code>Array.Object</code> | Array with the configuration of the slice |
+| config[].path | <code>Array</code> | Path to the property to be sliced |
+| config[].newPath | <code>Array</code> | Path to sets a new value in the slicedObject, if this is not defined, this will have the same value as the config[].path |
 
 **Example**  
 ```javascript
@@ -398,12 +401,12 @@ Callback at the end of the loop
 
 | Param | Type | Description |
 | --- | --- | --- |
-| options | <code>Object</code> | values in the end of loop |
-| options.indexPath | <code>Number</code> | index in the array path |
-| options.target | <code>Object</code> &#124; <code>Array</code> | target object |
-| [options.current] | <code>\*</code> | current value in target object |
-| [options.key] | <code>\*</code> | current value in the array path |
-| [options.previous] | <code>\*</code> | previous value in target object |
+| options | <code>Object</code> | Values in the end of the path |
+| options.indexPath | <code>Number</code> | Current index in the array path |
+| options.target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
+| [options.current] | <code>\*</code> | Current value in target object |
+| [options.key] | <code>\*</code> | Current value in the path |
+| [options.previous] | <code>\*</code> | Previous value in target object |
 
 
 # TODOS

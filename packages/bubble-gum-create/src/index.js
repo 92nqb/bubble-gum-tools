@@ -16,7 +16,7 @@ function getInitValue(path, initValue, last) {
 }
 
 /**
- * Creates a new object or a new array with an initial value in function of a array path
+ * It creates a new object or an initialized array depending on the input path
  *
  * @alias module:bubble-gum-tools.create
  * @example
@@ -42,15 +42,15 @@ function getInitValue(path, initValue, last) {
  *
  * ```
  *
- * @param {Array} path - array path with the structure of the new object
- * @param {*} initValue - value that will contain the last property in the path
- * @return {Object|Array} the new array or object
+ * @param {Array} path - Input path with the structure
+ * @param {*} initValue - Initial value for the end of the input path structure
+ * @return {Object|Array} output - The new array or new object with the input path structure
  *
  */
 export default function create(path, initValue) {
   (!Array.isArray(path)) && function(err) {
       throw err;
-  }(new TypeError('path shoulds be a Array'));
+  }(new TypeError('path shoulds be an Array'));
   const _path = [].concat(path);
   const last = _path.pop();
   const init = getInitValue(path, initValue, last);

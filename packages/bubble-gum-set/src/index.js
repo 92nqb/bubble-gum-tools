@@ -18,7 +18,7 @@ function getType(value) {
 }
 
 /**
- * Set a new value in the defined path, if it does not exist create it
+ * It sets a new value in a nested object or a nested array using an array path, if the path does not exist create this
  *
  * @alias module:bubble-gum-tools.set
  * @example
@@ -51,9 +51,9 @@ function getType(value) {
  * ```
  *
  *
- * @param {Object|Array} target - object target
- * @param {Array} path - array path to property in target
- * @param {*} valueToSet - value to set in target
+ * @param {Object|Array} target - Target object or target array
+ * @param {Array} path - Path to property
+ * @param {*} valueToSet - Value to set in target
  */
 export default function set(target, path, valueToSet) {
   (undefined == target || undefined == path) && function(err) {

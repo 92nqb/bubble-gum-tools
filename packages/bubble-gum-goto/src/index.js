@@ -2,17 +2,21 @@
  * Callback at the end of the loop
  *
  * @callback actionCallback
- * @param {Object} options - values in the end of loop
- * @param {Number} options.indexPath - index in the array path
- * @param {Object|Array} options.target - target object
- * @param {*} [options.current] - current value in target object
- * @param {*} [options.key] - current value in the array path
- * @param {*} [options.previous] - previous value in target object
+ * @param {Object} options - Values in the end of the path
+ * @param {Number} options.indexPath - Current index in the array path
+ * @param {Object|Array} options.target - Target object or target array
+ * @param {*} [options.current] - Current value in target object
+ * @param {*} [options.key] - Current value in the path
+ * @param {*} [options.previous] - Previous value in target object
  * @return {*}
  */
 
 /**
- * Goto path and call the function (actionCallback)
+ *
+ * It receives a input path and a callback(actionCallback), It returns the function **_goto**,
+ * the *_goto* function receives a target object or target array,
+ * when the *_goto* is called, this navigates the target object or target array using the input path,
+ * when it reaches the end of the path, *_goto* executs the callback and returns the result
  *
  * @alias module:bubble-gum-tools.goto
  * @example
@@ -47,18 +51,12 @@
  *
  * ```
  *
- * @param {Array} path - array path to property in target
- * @param {actionCallback} fn - call function in the end of loop
- * @return {*} result of call the callback fn
+ * @param {Array} path - Path to property
+ * @param {actionCallback} fn - Callback with the action that will be called at the end of the path
+ * @return {Function}
  */
 export default function goto(path, fn) {
   const { length: len } = path;
-
-  /**
-   * Callback that will receive the target to go
-   *
-   * @param {Object|Array} target
-   */
   return function _goto(target) {
     let previousValue, currentPath, indexPath;
     let currentValue = target;
