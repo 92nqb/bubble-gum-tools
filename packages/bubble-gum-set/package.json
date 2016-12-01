@@ -1,7 +1,7 @@
 {
   "name": "bubble-gum-set",
   "version": "0.0.1",
-  "description": "Set property in nested object",
+  "description": "Sets a new value in a nested object or a nested array using an array path, if the path does not exist create this",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-set",
