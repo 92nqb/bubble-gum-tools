@@ -81,8 +81,8 @@ console.log(resultGOTO); // => { 'other-foo': 'other-bar' }
 
 * [bubble-gum-tools](#module_bubble-gum-tools)
     * [.create(path, initValue)](#module_bubble-gum-tools.create) ⇒ <code>Object</code> &#124; <code>Array</code>
-    * [.get(target, path, [defaultValue])](#module_bubble-gum-tools.get) ⇒ <code>\*</code>
     * [.goto(path, fn)](#module_bubble-gum-tools.goto) ⇒ <code>function</code>
+    * [.get(target, path, [defaultValue])](#module_bubble-gum-tools.get) ⇒ <code>\*</code>
     * [.has(target, path, [isStrict])](#module_bubble-gum-tools.has) ⇒ <code>Boolean</code>
     * [.set(target, path, valueToSet)](#module_bubble-gum-tools.set)
     * [.slice(target, config)](#module_bubble-gum-tools.slice) ⇒ <code>Object</code>
@@ -119,47 +119,6 @@ It creates a new object or an initialized array depending on the input path
  // create both
  const mixed = create([0, 'nested', 'key'], 'value');
  console.log(mixed); // => [ { nested: { key: 'value' } } ]
-
-```
-<a name="module_bubble-gum-tools.get"></a>
-
-### bubble-gum-tools.get(target, path, [defaultValue]) ⇒ <code>\*</code>
-It gets a property from a nested object or a nested array using an array path
-
-**Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
-**Returns**: <code>\*</code> - propertyValue  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
-| path | <code>Array</code> | Path to property |
-| [defaultValue] | <code>\*</code> | Value to be returned in case the property does not exist |
-
-**Example**  
-```javascript
-
- const get = require('bubble-gum-tools').get;
-
- const target = {
-   root: {
-     foo: 'bar',
-   },
-   arr: [[
-     ['baz'],
-   ]],
- };
-
- // Working with nested objects
- const bar = get(target, ['root', 'foo']);
- console.log(bar); // => 'bar'
-
- // Working with nested arrays
- const baz = get(target, ['arr', 0, 0, 0]);
- console.log(baz); // => 'baz'
-
- // Set a default
- const defaultVal = get(target, ['no', 'defined'], 'default');
- console.log(defaultVal); // => 'default'
 
 ```
 <a name="module_bubble-gum-tools.goto"></a>
@@ -205,6 +164,47 @@ goto(['root', 'foo'], (result) => {
 
 const result = goto(['root', 'foo'], ({current, key}) => (current + '-' + key))(target);
 console.log(result); // => bar-foo
+
+```
+<a name="module_bubble-gum-tools.get"></a>
+
+### bubble-gum-tools.get(target, path, [defaultValue]) ⇒ <code>\*</code>
+It gets a property from a nested object or a nested array using an array path
+
+**Kind**: static method of <code>[bubble-gum-tools](#module_bubble-gum-tools)</code>  
+**Returns**: <code>\*</code> - propertyValue  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| target | <code>Object</code> &#124; <code>Array</code> | Target object or target array |
+| path | <code>Array</code> | Path to property |
+| [defaultValue] | <code>\*</code> | Value to be returned in case the property does not exist |
+
+**Example**  
+```javascript
+
+ const get = require('bubble-gum-tools').get;
+
+ const target = {
+   root: {
+     foo: 'bar',
+   },
+   arr: [[
+     ['baz'],
+   ]],
+ };
+
+ // Working with nested objects
+ const bar = get(target, ['root', 'foo']);
+ console.log(bar); // => 'bar'
+
+ // Working with nested arrays
+ const baz = get(target, ['arr', 0, 0, 0]);
+ console.log(baz); // => 'baz'
+
+ // Set a default
+ const defaultVal = get(target, ['no', 'defined'], 'default');
+ console.log(defaultVal); // => 'default'
 
 ```
 <a name="module_bubble-gum-tools.has"></a>
