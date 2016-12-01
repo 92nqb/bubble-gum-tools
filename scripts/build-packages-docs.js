@@ -23,27 +23,21 @@ const hTemplate = getTemplate(`${PROJECT_PATH}/${rootDir}/${templateFileName}`);
 const cTemplate = handlebars.compile(hTemplate);
 // TODO: add to scriptsConfig
 const MODULES_CONFIG = [{
-  description: 'aaaaaaaaaa',
   moduleAlias: 'create',
   moduleName: 'bubble-gum-create',
 }, {
-  description: 'aaaaaaaaaa',
   moduleAlias: 'get',
   moduleName: 'bubble-gum-get',
 }, {
-  description: 'aaaaaaaaaa',
   moduleAlias: 'goto',
   moduleName: 'bubble-gum-goto',
 }, {
-  description: 'aaaaaaaaaa',
   moduleAlias: 'has',
   moduleName: 'bubble-gum-has',
 }, {
-  description: 'aaaaaaaaaa',
   moduleAlias: 'set',
   moduleName: 'bubble-gum-set',
 }, {
-  description: 'aaaaaaaaaa',
   moduleAlias: 'slice',
   moduleName: 'bubble-gum-slice',
 }].map(moduleConfig => {
@@ -61,6 +55,10 @@ const MODULES_CONFIG = [{
   const { pathCode } = moduleConfig;
   const JSDoctemplateData = jsdoc2md.getTemplateDataSync({ files: pathCode });
   return Object.assign({}, moduleConfig, { JSDoctemplateData });
+}).map(moduleConfig => {
+  const { pathModule } = moduleConfig;
+  const description = require(pathModule + '/package.json').description;
+  return Object.assign({}, moduleConfig, { description });
 }).map(moduleConfig => {
   const { pathModule } = moduleConfig;
   const { JSDoctemplateData } = moduleConfig;
