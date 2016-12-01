@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-slice",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Slices a object or an array generating a new object or a new array",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.es2015.js",
