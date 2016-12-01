@@ -1,7 +1,7 @@
 {
   "name": "bubble-gum-has",
   "version": "0.0.1",
-  "description": "Check if a property exists in nested object",
+  "description": "Checks if the property exists in a nested object or a nested array using an array path",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-has",

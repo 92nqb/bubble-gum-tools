@@ -1,7 +1,7 @@
 {
   "name": "bubble-gum-create",
   "version": "0.0.1",
-  "description": "Nested object created by array path",
+  "description": "Creates a new object or an initialized array depending on the input path",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-create",

@@ -12,18 +12,22 @@
  */
 
 /**
+ * @module bubble-gum-goto
+ */
+
+/**
  *
  * It receives a input path and a callback(actionCallback), It returns the function **_goto**,
  * the *_goto* function receives a target object or target array,
  * when the *_goto* is called, this navigates the target object or target array using the input path,
  * when it reaches the end of the path, *_goto* executs the callback and returns the result
  *
- * @alias module:bubble-gum-tools.goto
+ * @alias module:bubble-gum-goto
  * @example
  *
  * ```javascript
  *
- * const goto = require('bubble-gum-tools').goto;
+ * const goto = require('bubble-gum-goto');
  *
  * const target = {
  *   root: {

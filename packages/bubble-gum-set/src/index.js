@@ -18,14 +18,18 @@ function getType(value) {
 }
 
 /**
+ * @module bubble-gum-set
+ */
+
+/**
  * It sets a new value in a nested object or a nested array using an array path, if the path does not exist create this
  *
- * @alias module:bubble-gum-tools.set
+ * @alias module:bubble-gum-set
  * @example
  *
  * ```javascript
  *
- * const set = require('bubble-gum-tools').set;
+ * const set = require('bubble-gum-set');
  *
  * const target = {
  *   root: {
