@@ -16,13 +16,17 @@ function getInitValue(path, initValue, last) {
 }
 
 /**
+ * @module bubble-gum-create
+ */
+
+/**
  * It creates a new object or an initialized array depending on the input path
  *
- * @alias module:bubble-gum-tools.create
+ * @alias module:bubble-gum-create
  * @example
  *
  * ```js
- *  const create = require('bubble-gum-tools').create;
+ *  const create = require('bubble-gum-create');
  *
  *  // create nested arrays
  *  const nestedArray = create([0, 2, 0], 'bar');

@@ -9,14 +9,18 @@ const _hasFnStrict = function hasNoStrict({ current }) {
 };
 
 /**
+ * @module bubble-gum-has
+ */
+
+/**
  * It checks if the property exists in a nested object or a nested array using an array path
- * @alias module:bubble-gum-tools.has
+ * @alias module:bubble-gum-has
  * @example
  *
  *
  * ```javascript
  *
- *  const has = require('bubble-gum-tools').has;
+ *  const has = require('bubble-gum-has');
  *
  *  const target1 = {
  *    root: {
@@ -42,7 +46,7 @@ const _hasFnStrict = function hasNoStrict({ current }) {
  *
  * ```javascript
  *
- *  const has = require('bubble-gum-tools').has;
+ *  const has = require('bubble-gum-has');
  *
  *  const target = {
  *    root: {
@@ -70,7 +74,7 @@ const _hasFnStrict = function hasNoStrict({ current }) {
  * ```javascript
  *
  *
- *  const has = require('bubble-gum-tools').has;
+ *  const has = require('bubble-gum-has');
  *
  *  const target = {
  *    root: {

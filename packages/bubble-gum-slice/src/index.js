@@ -2,14 +2,18 @@ import set from '../../bubble-gum-set/src';
 import get from '../../bubble-gum-get/src';
 
 /**
+ * @module bubble-gum-slice
+ */
+
+/**
  * It slices a object or an array generating a new object or a new array
  *
- * @alias module:bubble-gum-tools.slice
+ * @alias module:bubble-gum-slice
  * @example
  *
  * ```javascript
  *
- * const slice = require('bubble-gum-tools').slice;
+ * const slice = require('bubble-gum-slice');
  *
  * const target = {
  *   root: { foo: 'bar' },

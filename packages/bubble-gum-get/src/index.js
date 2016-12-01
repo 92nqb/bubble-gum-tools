@@ -1,14 +1,18 @@
 import goto from '../../bubble-gum-goto/src';
 
 /**
+ * @module bubble-gum-get
+ */
+
+/**
  * It gets a property from a nested object or a nested array using an array path
  *
- * @alias module:bubble-gum-tools.get
+ * @alias module:bubble-gum-get
  * @example
  *
  * ```javascript
  *
- *  const get = require('bubble-gum-tools').get;
+ *  const get = require('bubble-gum-get');
  *
  *  const target = {
  *    root: {
