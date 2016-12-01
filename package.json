@@ -22,6 +22,9 @@
     "packages:es5": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-es5.js",
     "packages:join": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages.js",
     "packages:build": "npm run packages:clean && npm run packages:join && npm run packages:es5",
+    "packages:readme:clean": "rimraf ./packages/*/README.md",
+    "packages:readme:build": "cross-env PROJECT_PATH=`pwd` node scripts/build-packages-docs",
+    "packages:readme": "npm run packages:readme:clean && npm run packages:readme:build",
     "packages:publish": "npm run packages:build && lerna publish",
     "clean:all": "npm run coverage:clean && npm run bundle:clean && npm run packages:clean"
   },
@@ -53,6 +56,7 @@
     "cross-env": "^3.1.3",
     "fs-extra": "^0.30.0",
     "glob": "^7.1.1",
+    "handlebars": "^4.0.6",
     "jsdoc": "^3.4.3",
     "jsdoc-to-markdown": "^2.0.1",
     "lerna": "2.0.0-beta.30",
