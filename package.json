@@ -71,14 +71,29 @@
   },
   "scriptsConfig": {
     "rootDir": "packages",
-    "alias": {
-      "create": "packages/bubble-gum-create",
-      "get": "packages/bubble-gum-get",
-      "goto": "packages/bubble-gum-goto",
-      "has": "packages/bubble-gum-has",
-      "set": "packages/bubble-gum-set",
-      "slice": "packages/bubble-gum-slice"
-    }
+    "moduleFather": "bubble-gum-tools",
+    "folderES6": "src",
+    "folderTarget": "lib",
+    "folderTest": "test",
+    "packages": [{
+      "alias": "create",
+      "name": "bubble-gum-create"
+    }, {
+      "alias": "get",
+      "name": "bubble-gum-get"
+    }, {
+      "alias": "goto",
+      "name": "bubble-gum-goto"
+    }, {
+      "alias": "has",
+      "name": "bubble-gum-has"
+    }, {
+      "alias": "set",
+      "name": "bubble-gum-set"
+    }, {
+      "alias": "slice",
+      "name": "bubble-gum-slice"
+    }]
   },
   "nyc": {
     "exclude": [

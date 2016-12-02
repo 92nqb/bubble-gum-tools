@@ -2,23 +2,30 @@ const babel = require('babel-core');
 const minimist = require('minimist');
 const fs = require('fs-extra');
 const chalk = require('chalk');
+const path = require('path');
+const {
+  getPackages: getPackagesConfig,
+  getfolderTarget,
+  getPackageRootPath,
+  filterPackagesByAlias
+} = require('./utils');
 
-const PROJECT_PATH = process.env.PROJECT_PATH;
+const folderTarget = getfolderTarget();
+const { PROJECT_PATH } = process.env.;
 const { _ : packagesAlias } = minimist(process.argv.slice(2));
-const { alias, rootDir } = require('../package.json').scriptsConfig;
 
 const ES2015_FILE = 'index.es2015.js';
 const MAIN_FILE = 'index.js';
 const BABEL_FILE = '.babelrc';
-const TARGET_FOLDER = 'lib';
+
 let defaultBabelRC;
 
-function getBabelConfig(path) {
-  console.log(`get babel config file to ${path}`);
+function getBabelConfig(_path) {
+  console.log(`get babel config file to ${_path}`);
   try {
-    return fs.readJsonSync(path);
+    return fs.readJsonSync(_path);
   } catch (err) {
-    console.log(chalk.red(`throw exception when read the '${path}' file`));
+    console.log(chalk.red(`throw exception when read the '${_path}' file`));
     if (defaultBabelRC) {
       console.log(chalk.green('use default babel config'));
       return defaultBabelRC;
@@ -28,29 +35,20 @@ function getBabelConfig(path) {
   }
 }
 
-defaultBabelRC = getBabelConfig(`${PROJECT_PATH}/${BABEL_FILE}`);
+defaultBabelRC = getBabelConfig(path.resolve(PROJECT_PATH, BABEL_FILE));
 
-// PACKAGES_FOLDER
-// alias
-function getPackageRootPath(_package) {
-  return `${PROJECT_PATH}/${_package}`;
-}
-
-function getPackagePaths(_package) {
+function getPackagePaths(moduleConfig) {
+  const { modulePath } = moduleConfig;
   return {
-    babelConfig: `${_package}/${BABEL_FILE}`,
-    targetES2015: `${_package}/${TARGET_FOLDER}/${ES2015_FILE}`,
-    targetPath: `${_package}/${TARGET_FOLDER}/${MAIN_FILE}`,
+    babelConfig: path.resolve(modulePath, BABEL_FILE),
+    targetES2015: path.resolve(modulePath, folderTarget, ES2015_FILE),
+    targetPath: path.resolve(modulePath, folderTarget, MAIN_FILE),
   };
 }
 
-// alias
 function getPackages(packagesList) {
-  return packagesList
-    .map(name => alias[name])
-    .map(getPackageRootPath)
-    .map(getPackagePaths)
-    ;
+  return packagesList.map(getPackageRootPath(PROJECT_PATH))
+    .map(getPackagePaths);
 }
 
 function toES6File(targetPath, babelRC) {
@@ -68,7 +66,8 @@ function writeFile({ targetPath, es5File: { code: es5code } }) {
 
 function run() {
   const _packages = (packagesAlias.length === 0) ?
-    Object.keys(alias) : packagesAlias;
+    getPackagesConfig() : filterPackagesByAlias(packagesAlias);
+
   getPackages(_packages)
     .map(({babelConfig, targetES2015, targetPath}) => ({
       babelConfig: getBabelConfig(babelConfig),

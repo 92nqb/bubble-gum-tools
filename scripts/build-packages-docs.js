@@ -4,70 +4,95 @@ const fs = require('fs');
 const path = require('path');
 
 const PROJECT_PATH = process.env.PROJECT_PATH;
-const { alias, rootDir } = require('../package.json').scriptsConfig;
-
-const templateFileName = 'packages.readme.hbs';
 const README = 'README.md';
-const mainFolder = 'src';
+const PACKAGES_README_TEMPLATE = 'packages.readme.hbs';
+
+const {
+  getPackages,
+  getRootDir,
+  getModuleFather,
+  getfolderES6,
+} = require('./utils');
+
+const rootDir = getRootDir();
+const moduleFather = getModuleFather();
+const folderES6 = getfolderES6();
+
+const hTemplate = getTemplate(`${PROJECT_PATH}/${rootDir}/${PACKAGES_README_TEMPLATE}`);
+
+// {{moduleName}}
+// {{description}}
+// {moduleName}}
+const cTemplate = handlebars.compile(hTemplate);
+
+getPackages()
+  .map(addModuleFather)
+  .map(addModulePath)
+  .map(addCodePaths)
+  .map(addTemplateData)
+  .map(addDescription)
+  .map(processTemplate)
+  .forEach(writeReadme)
+;
+
+function addModuleFather(moduleConfig) {
+  return Object.assign({}, moduleConfig, {
+    moduleFather,
+  });
+}
 
 function getTemplate(path) {
   console.log('load template in ' + path);
   return fs.readFileSync(path, 'utf8');
 }
 
-const hTemplate = getTemplate(`${PROJECT_PATH}/${rootDir}/${templateFileName}`);
-
-// {{moduleName}}
-// {{description}}
-// {moduleName}}
-const cTemplate = handlebars.compile(hTemplate);
-// TODO: add to scriptsConfig
-const MODULES_CONFIG = [{
-  moduleAlias: 'create',
-  moduleName: 'bubble-gum-create',
-}, {
-  moduleAlias: 'get',
-  moduleName: 'bubble-gum-get',
-}, {
-  moduleAlias: 'goto',
-  moduleName: 'bubble-gum-goto',
-}, {
-  moduleAlias: 'has',
-  moduleName: 'bubble-gum-has',
-}, {
-  moduleAlias: 'set',
-  moduleName: 'bubble-gum-set',
-}, {
-  moduleAlias: 'slice',
-  moduleName: 'bubble-gum-slice',
-}].map(moduleConfig => {
-  const { moduleAlias } = moduleConfig;
-  const pathModule = alias[moduleAlias];
+function addModulePath(moduleConfig) {
+  const { moduleName } = moduleConfig;
+  const pathModule = path.resolve(PROJECT_PATH, rootDir ,moduleName);
   return Object.assign({}, moduleConfig, {
-    pathModule: `${PROJECT_PATH}/${pathModule}`,
+    pathModule,
   });
-}).map(moduleConfig => {
+}
+
+function addCodePaths(moduleConfig) {
   const { pathModule } = moduleConfig;
   return Object.assign({}, moduleConfig, {
-    pathCode: `${pathModule}/${mainFolder}/**/*.js`,
+    pathCode: `${pathModule}/${folderES6}/**/*.js`,
   });
-}).map(moduleConfig => {
+}
+
+function addTemplateData(moduleConfig) {
   const { pathCode } = moduleConfig;
   const JSDoctemplateData = jsdoc2md.getTemplateDataSync({ files: pathCode });
-  return Object.assign({}, moduleConfig, { JSDoctemplateData });
-}).map(moduleConfig => {
+  return Object.assign({}, moduleConfig, {
+    JSDoctemplateData
+  });
+}
+
+function addDescription(moduleConfig) {
   const { pathModule } = moduleConfig;
-  const description = require(pathModule + '/package.json').description;
-  return Object.assign({}, moduleConfig, { description });
-}).map(moduleConfig => {
+  const modulePackagejson = path.resolve(pathModule, 'package.json');
+  console.log('read package.json file and add description in ' + modulePackagejson);
+  const { description } = require(modulePackagejson);
+  return Object.assign({}, moduleConfig, {
+    description
+  });
+}
+
+function processTemplate(moduleConfig) {
   const { pathModule } = moduleConfig;
   const { JSDoctemplateData } = moduleConfig;
   const main = jsdoc2md.renderSync({ data: JSDoctemplateData });
   return {
     pathModule,
-    markdown: cTemplate(Object.assign({}, moduleConfig, { main }))
+    markdown: cTemplate(Object.assign({}, moduleConfig, {
+      main
+    })),
   };
-}).forEach(({ pathModule, markdown }) => {
-  fs.writeFileSync(path.resolve(pathModule, README), markdown);
-})
-;
+}
+
+function writeReadme({ pathModule, markdown }) {
+  const readmePath = path.resolve(pathModule, README);
+  console.log('write package readme in ' + readmePath);
+  fs.writeFileSync(readmePath, markdown);
+}

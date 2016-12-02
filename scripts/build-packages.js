@@ -1,12 +1,21 @@
 const rollup = require('rollup');
 const resolve = require('rollup-plugin-node-resolve');
 const minimist = require('minimist');
-const { alias } = require('../package.json').scriptsConfig;
+const path = require('path');
+const {
+  getfolderES6,
+  getfolderTarget,
+  getPackages: getPackagesConfig,
+  getPackageRootPath,
+  filterPackagesByAlias,
+} = require('./utils');
+
 const { _ : packagesAlias } = minimist(process.argv.slice(2));
 
-const PROJECT_ROOT = process.env.PROJECT_PATH;
-const ES6_DIR = 'src';
-const OUTPUT_DIR = 'lib';
+const { PROJECT_PATH } = process.env;
+
+const ES6_DIR = getfolderES6();
+const OUTPUT_DIR = getfolderTarget();
 
 function callRollup({entryPath, outputPath, name}) {
   console.log(`join packages ${entryPath} in ${outputPath}`);
@@ -23,19 +32,26 @@ function callRollup({entryPath, outputPath, name}) {
   });
 }
 
+function getPackagePaths(moduleConfig) {
+  const { moduleName: name, modulePath } = moduleConfig;
+  return {
+    entryPath: path.resolve(modulePath, ES6_DIR),
+    outputPath: path.resolve(modulePath, OUTPUT_DIR),
+    name,
+  };
+}
+
+function getPackages(packagesList) {
+  return packagesList
+    .map(getPackageRootPath(PROJECT_PATH))
+    .map(getPackagePaths);
+}
+
 function run() {
   const _packages = (packagesAlias.length === 0) ?
-    Object.keys(alias) : packagesAlias;
-    _packages.map(aliasName => ({
-      packagesPath: `${PROJECT_ROOT}/${alias[aliasName]}`,
-      packagesName: aliasName,
-    }))
-    .map(({ packagesPath, packagesName: name }) => ({
-      entryPath: `${packagesPath}/${ES6_DIR}`,
-      outputPath: `${packagesPath}/${OUTPUT_DIR}`,
-      name,
-    }))
-    .forEach(callRollup);
+    getPackagesConfig() : filterPackagesByAlias(packagesAlias);
+
+    getPackages(_packages).forEach(callRollup);
 }
 
 run();
