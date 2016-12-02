@@ -11,7 +11,7 @@ const {
 } = require('./utils');
 
 const folderTarget = getfolderTarget();
-const { PROJECT_PATH } = process.env.;
+const { PROJECT_PATH } = process.env;
 const { _ : packagesAlias } = minimist(process.argv.slice(2));
 
 const ES2015_FILE = 'index.es2015.js';
