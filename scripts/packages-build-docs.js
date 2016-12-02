@@ -5,7 +5,7 @@ const path = require('path');
 
 const PROJECT_PATH = process.env.PROJECT_PATH;
 const README = 'README.md';
-const PACKAGES_README_TEMPLATE = 'packages.readme.hbs';
+const PACKAGES_README_TEMPLATE = '_packages.readme.hbs';
 
 const {
   getPackages,

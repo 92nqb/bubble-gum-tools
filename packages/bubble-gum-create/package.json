@@ -5,13 +5,16 @@
   "main": "lib/index.js",
   "jsnext:main": "lib/index.es2015.js",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-create",
-  "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
+  "homepage": "https://github.com/nquicenob/bubble-gum-tools/blob/master/packages/bubble-gum-create#readme",
+  "bugs": {
+    "url": "https://github.com/nquicenob/bubble-gum-tools/issues"
+  },
   "keywords": [
     "nested-objects",
     "create-nested-objects",
     "array-path",
     "bubble-gum-tools-modularized"
   ],
-  "author": "Nicolas Quiceno Benavides",
+  "author": "Nicolas Quiceno Benavides <nquicenob@gmail.com>",
   "license": "MIT"
 }

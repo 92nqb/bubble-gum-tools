@@ -15,7 +15,7 @@
     "bundle:join": "cross-env PROJECT_PATH=`pwd`  node scripts/bundle-build.js",
     "bundle:build": "npm run bundle:clean && npm run bundle:join && npm run bundle:es5",
     "bundle:readme:clean": "rimraf ./README.md",
-    "bundle:readme:build": "jsdoc2md --template ./packages/readme.hbs ./lib/bubble-gum-tools.es2015.js > ./README.md",
+    "bundle:readme:build": "jsdoc2md --template ./packages/_readme.hbs ./lib/bubble-gum-tools.es2015.js > ./README.md",
     "bundle:readme": "npm run bundle:build && npm run bundle:readme:clean && npm run bundle:readme:build",
     "bundle:publish": "npm run bundle:build && npm publish",
     "packages:clean": "rimraf ./packages/*/lib",
@@ -41,7 +41,7 @@
     "array-path",
     "bubble-gum-tools"
   ],
-  "author": "Nicolas Quiceno Benavides",
+  "author": "Nicolas Quiceno Benavides <nquicenob@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nquicenob/bubble-gum-tools/issues"
