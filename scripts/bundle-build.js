@@ -37,7 +37,7 @@ const modulesConfig = getPackages()
 
 [{
   format: 'es',
-  name: 'bubble-gum-tools.mjs',
+  name: 'bubble-gum-tools.m.js',
   }, {
   format: 'cjs',
   name: 'bubble-gum-tools.js',
