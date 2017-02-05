@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "Work with nested objects is easy with a bubble-gum",
   "main": "lib/bubble-gum-tools.js",
-  "jsnext:main": "lib/bubble-gum-tools.es2015.js",
+  "jsnext:main": "lib/bubble-gum-tools.mjs",
   "scripts": {
     "lint": "standard 'packages/*/src/*.js' 'packages/*/test/*.js'",
     "coverage:clean": "rimraf ./coverage && rimraf ./.nyc_output",
@@ -11,17 +11,15 @@
     "test": "cross-env PROJECT_PATH=`pwd` node scripts/test",
     "test:dev": "nodemon -q -w ./packages -x 'npm run test'",
     "bundle:clean": "rimraf ./lib && mkdir lib || true",
-    "bundle:es5": "babel ./lib/bubble-gum-tools.es2015.js --out-file ./lib/bubble-gum-tools.js",
-    "bundle:join": "cross-env PROJECT_PATH=`pwd`  node scripts/bundle-build.js",
-    "bundle:build": "npm run bundle:clean && npm run bundle:join && npm run bundle:es5",
+    "prebundle:build": "npm run bundle:clean",
+    "bundle:build": "cross-env PROJECT_PATH=`pwd` node scripts/bundle-build.js",
     "bundle:readme:clean": "rimraf ./README.md",
     "bundle:readme:build": "jsdoc2md --template ./packages/_readme.hbs ./lib/bubble-gum-tools.es2015.js > ./README.md",
     "bundle:readme": "npm run bundle:build && npm run bundle:readme:clean && npm run bundle:readme:build",
     "bundle:publish": "npm run bundle:build && npm publish",
     "packages:clean": "rimraf ./packages/*/lib",
-    "packages:es5": "cross-env PROJECT_PATH=`pwd` node scripts/packages-build-es5.js",
-    "packages:join": "cross-env PROJECT_PATH=`pwd` node scripts/packages-build-join.js",
-    "packages:build": "npm run packages:clean && npm run packages:join && npm run packages:es5",
+    "prepackages:build": "npm run packages:clean",
+    "packages:build": "cross-env PROJECT_PATH=`pwd` node scripts/packages-build.js",
     "packages:readme:clean": "rimraf ./packages/*/README.md",
     "packages:readme:build": "cross-env PROJECT_PATH=`pwd` node scripts/packages-build-docs",
     "packages:readme": "npm run packages:readme:clean && npm run packages:readme:build",
@@ -65,6 +63,7 @@
     "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
     "rollup": "^0.36.3",
+    "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "standard": "^8.5.0",
     "tape": "^4.6.2"
@@ -75,25 +74,32 @@
     "folderES6": "src",
     "folderTarget": "lib",
     "folderTest": "test",
-    "packages": [{
-      "alias": "create",
-      "name": "bubble-gum-create"
-    }, {
-      "alias": "get",
-      "name": "bubble-gum-get"
-    }, {
-      "alias": "goto",
-      "name": "bubble-gum-goto"
-    }, {
-      "alias": "has",
-      "name": "bubble-gum-has"
-    }, {
-      "alias": "set",
-      "name": "bubble-gum-set"
-    }, {
-      "alias": "slice",
-      "name": "bubble-gum-slice"
-    }]
+    "packages": [
+      {
+        "alias": "create",
+        "name": "bubble-gum-create"
+      },
+      {
+        "alias": "get",
+        "name": "bubble-gum-get"
+      },
+      {
+        "alias": "goto",
+        "name": "bubble-gum-goto"
+      },
+      {
+        "alias": "has",
+        "name": "bubble-gum-has"
+      },
+      {
+        "alias": "set",
+        "name": "bubble-gum-set"
+      },
+      {
+        "alias": "slice",
+        "name": "bubble-gum-slice"
+      }
+    ]
   },
   "nyc": {
     "exclude": [

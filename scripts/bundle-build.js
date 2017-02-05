@@ -1,6 +1,8 @@
 const rollup = require('rollup');
 const path = require('path');
 const resolve = require('rollup-plugin-node-resolve');
+const buble = require('rollup-plugin-buble');
+
 const overwriteComments = require('./rollup/rollup-plugin-overwrite-comments');
 const {
   getPackages,
@@ -33,19 +35,27 @@ const modulesConfig = getPackages()
   .map(addModuleFather)
   .map(addModulePath);
 
-rollup.rollup({
-  entry: 'packages/index.js',
-  plugins: [
-    resolve(),
-    overwriteComments({
-      modulesConfig,
-    })
-  ]
-}).then(bundle => bundle.write({
+[{
   format: 'es',
-  moduleName: 'bubble-gum-tools',
-  dest: 'lib/bubble-gum-tools.es2015.js'
-})).catch(err => {
-  console.error(err.stack);
-  process.exit(1);
+  name: 'bubble-gum-tools.mjs',
+  }, {
+  format: 'cjs',
+  name: 'bubble-gum-tools.js',
+}].forEach(({format, name}) => {
+  rollup.rollup({
+    entry: 'packages/index.js',
+    plugins: [
+      resolve(),
+      buble(),
+      overwriteComments({ modulesConfig })
+    ],
+  }).then(bundle => bundle.write({
+    format,
+    exports: 'named',
+    moduleName: 'bubble-gum-tools',
+    dest: `lib/${name}`,
+  })).catch(err => {
+    console.error(err.stack);
+    process.exit(1);
+  });
 });

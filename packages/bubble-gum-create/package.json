@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Creates a new object or an initialized array depending on the input path",
   "main": "lib/index.js",
-  "jsnext:main": "lib/index.es2015.js",
+  "jsnext:main": "lib/index.mjs",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-create",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools/blob/master/packages/bubble-gum-create#readme",
   "bugs": {

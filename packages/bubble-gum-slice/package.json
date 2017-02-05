@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Slices a object or an array generating a new object or a new array",
   "main": "lib/index.js",
-  "jsnext:main": "lib/index.es2015.js",
+  "jsnext:main": "lib/index.mjs",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-slice",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools/blob/master/packages/bubble-gum-slice#readme",
   "bugs": {

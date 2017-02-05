@@ -1,5 +1,6 @@
 const rollup = require('rollup');
 const resolve = require('rollup-plugin-node-resolve');
+const buble = require('rollup-plugin-buble');
 const minimist = require('minimist');
 const path = require('path');
 const {
@@ -18,15 +19,24 @@ const ES6_DIR = getfolderES6();
 const OUTPUT_DIR = getfolderTarget();
 
 function callRollup({entryPath, outputPath, name}) {
-  console.log(`join packages ${entryPath} in ${outputPath}`);
+  console.log(`build ${name} module`);
   return rollup.rollup({
     entry: entryPath + '/index.js',
-    plugins: [resolve()]
-  }).then(bundle => bundle.write({
-    format: 'es',
-    moduleName: name,
-    dest: outputPath + '/index.es2015.js'
-  })).catch(err => {
+    plugins: [ resolve(), buble(), ],
+  }).then(bundle => {
+    return Promise.all([
+      bundle.write({
+        format: 'es',
+        moduleName: name,
+        dest: outputPath + '/index.mjs'
+      }),
+      bundle.write({
+        format: 'cjs',
+        moduleName: name,
+        dest: outputPath + '/index.js'
+      }),
+    ]);
+  }).catch(err => {
     console.error(err);
     process.exit(1);
   });

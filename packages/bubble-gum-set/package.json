@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "description": "Sets a new value in a nested object or a nested array using an array path, if the path does not exist create this",
   "main": "lib/index.js",
-  "jsnext:main": "lib/index.es2015.js",
+  "jsnext:main": "lib/index.mjs",
   "repository": "https://github.com/nquicenob/bubble-gum-tools/tree/master/packages/bubble-gum-set",
   "homepage": "https://github.com/nquicenob/bubble-gum-tools/blob/master/packages/bubble-gum-set#readme",
   "bugs": {

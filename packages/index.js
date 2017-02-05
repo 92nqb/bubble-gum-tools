@@ -70,3 +70,12 @@ const bubblegumTools ={
 };
 
 export default bubblegumTools;
+
+export {
+  create as create,
+  get as get,
+  goto as goto,
+  has as has,
+  set as set,
+  slice as slice,
+};
