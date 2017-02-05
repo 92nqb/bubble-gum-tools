@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-tools",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Work with nested objects is easy with a bubble-gum",
   "main": "lib/bubble-gum-tools.js",
   "jsnext:main": "lib/bubble-gum-tools.mjs",

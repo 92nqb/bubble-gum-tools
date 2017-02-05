@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-get",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Get a property from a nested object or a nested array using an array path",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.mjs",
