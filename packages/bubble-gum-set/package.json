@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-set",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Sets a new value in a nested object or a nested array using an array path, if the path does not exist create this",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.mjs",

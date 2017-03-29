@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-goto",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Goes to property in nested object and execute a callback",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.mjs",
