@@ -1,6 +1,6 @@
 {
   "name": "bubble-gum-tools",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Work with nested objects is easy with a bubble-gum",
   "main": "lib/bubble-gum-tools.js",
   "jsnext:main": "lib/bubble-gum-tools.m.js",
@@ -46,6 +46,7 @@
   },
   "homepage": "https://github.com/nquicenob/bubble-gum-tools#readme",
   "devDependencies": {
+    "acorn": "^5.0.0",
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
