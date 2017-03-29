@@ -65,7 +65,7 @@ export default function goto(path, fn) {
     let previousValue, currentPath, indexPath;
     let currentValue = target;
     let init = 0;
-    while((undefined !== currentValue) && (init < len)) {
+    while((undefined !== currentValue && null !== currentValue) && (init < len)) {
       if (init > 0) {
         previousValue = currentValue;
       }
